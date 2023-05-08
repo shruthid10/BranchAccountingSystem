@@ -12,11 +12,11 @@
 		<input type="text" id="username" name="username" required><br><br>
 		<label for="password">Password:</label>
 		<input type="password" id="password" name="password" required><br><br>
-		<label for="role">Select Role:</label>
-		<select id="role" name="role">
+		<label for="role">Select Role:</label> 
+		 <select id="role" name="role">
 			<option value="admin">Admin</option>
 			<option value="accountant">Accountant</option>
-		</select><br><br>
+		</select><br><br> 
 		<input type="submit" value="Login">
 		  <p class="error">${error}</p>
 	</form>

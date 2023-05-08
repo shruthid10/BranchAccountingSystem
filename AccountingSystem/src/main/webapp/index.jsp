@@ -7,5 +7,5 @@
 <a href="paymentform">Payment Form</a>
 
 
-<!-- <a href="login">Login</a></br>
-<a href="register">Register</a> -->
+<a href="login">Login</a></br>
+<a href="register">Register</a> 
