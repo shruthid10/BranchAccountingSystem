@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.accounting.beans.Accountant;
-
+import com.accounting.beans.Branch;
 import com.accounting.dao.AccountantDao;
+import com.accounting.dao.BranchDao;
 
 @Controller
 public class AccontantController {
@@ -20,23 +21,31 @@ public class AccontantController {
 	@Autowired
 	AccountantDao accountantdao;
 	
+	@Autowired
+	BranchDao dao;
+	
 	@RequestMapping("/accountantform")  
     public String showaccountantform(Model m){  
-    	m.addAttribute("command", new Accountant());
-    	return "accountantform"; 
+		List<Branch> branches = dao.getAllBranches();
+        m.addAttribute("branches", branches);
+        m.addAttribute("command", new Accountant());
+        return "accountantform";
+    	
+    	
     } 
 	
 
 	  @RequestMapping(value="/saveaccountant",method = RequestMethod.POST) 
 	  public String saveaccountant(@ModelAttribute("accountant") Accountant accountant){
 	  accountantdao.saveaccountant(accountant); 
+	  
 	  return "redirect:/viewaccountant"; 
 	  }
 	  
 
 	  @RequestMapping("/viewaccountant")  
 	    public String viewaccountant(Model m){  
-	        List<Accountant> list=accountantdao.getAccountants();  
+	        List<Accountant> list=accountantdao.getAccountantsWithBranchNames();  
 	        m.addAttribute("list",list);
 	        return "viewaccountant";  
 	    } 

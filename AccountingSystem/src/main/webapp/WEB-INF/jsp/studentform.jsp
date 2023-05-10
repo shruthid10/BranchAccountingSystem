@@ -36,10 +36,15 @@
           <td>Course_Name:</td>  
           <td><form:input path="course_name" /></td>
          </tr>
-          <tr>  
-          <td>Branch_Id:</td>  
-          <td><form:input path="branch_id" /></td>
-         </tr>
+          <tr>
+            <td>Branch:</td>
+            <td>
+                <form:select path="branch_id">
+                    <form:option value="" label="--- Select Branch ---"/>
+                    <form:options items="${branches}" itemValue="branch_id" itemLabel="branch_name"/>
+                </form:select>
+            </td>
+        </tr>
          <tr>  
           <td> </td>  
           <td><input type="submit" value="Save Student" /></td>  

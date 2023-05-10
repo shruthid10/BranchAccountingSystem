@@ -8,6 +8,8 @@ public class Accountant {
 	  private String email;
 	  private float salary;
 	  private int branch_id;
+	  private String branch_name;
+	  private Branch branch;
 	public int getAccountant_id() {
 		return accountant_id;
 	}
@@ -44,6 +46,13 @@ public class Accountant {
 	public void setBranch_id(int branch_id) {
 		this.branch_id = branch_id;
 	}
+	public void setBranch_name(String branch_name) {
+		this.branch_name = branch_name;
+	}
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
+	
 	  
 	  
 

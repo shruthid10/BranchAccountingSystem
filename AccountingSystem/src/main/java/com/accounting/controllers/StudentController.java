@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import com.accounting.beans.Branch;
 import com.accounting.beans.Student;
+import com.accounting.dao.BranchDao;
 import com.accounting.dao.StudentDao;
 
 @Controller
@@ -19,10 +20,14 @@ public class StudentController {
 	
 	@Autowired
 	StudentDao studentdao;
-	
+	@Autowired
+	BranchDao dao;
 	@RequestMapping("/studentform")  
     public String showform(Model m){  
     	m.addAttribute("command", new Student());
+    	List<Branch> branches = dao.getAllBranches();
+        m.addAttribute("branches", branches);
+        m.addAttribute("student", new Student());
     	return "studentform"; 
     }  
 	

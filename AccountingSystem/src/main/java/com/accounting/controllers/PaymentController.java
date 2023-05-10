@@ -1,6 +1,7 @@
 package com.accounting.controllers;
   
-  import java.util.List;
+
+import java.util.List;
   
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +30,11 @@ import com.accounting.dao.PaymentDao;
 		}
 
 		@RequestMapping(value = "/savepayment", method = RequestMethod.POST)
-		public String save(@ModelAttribute("payment") Payment payment) {
-			paymentdao.save(payment);
+		public String save( Payment payment) {
+			
+			
+		
+		     paymentdao.save(payment);
 			return "redirect:/viewpaymentdetails";
 		}
 
@@ -41,7 +45,7 @@ import com.accounting.dao.PaymentDao;
 			return "viewpaymentdetails";
 		}
 
-		@RequestMapping(value = "/editayment/{id}")
+		@RequestMapping(value = "/editpayment/{id}")
 		public String edit(@PathVariable int id, Model m) {
 			Payment payment = paymentdao.getPaymentId(id);
 			m.addAttribute("command", payment);
@@ -54,7 +58,7 @@ import com.accounting.dao.PaymentDao;
 			return "redirect:/viewpaymentdetails";
 		}
 
-		@RequestMapping(value = "/deletepaymentdetails/{id}", method = RequestMethod.GET)
+		@RequestMapping(value = "/deletepayment/{id}", method = RequestMethod.GET)
 		public String delete(@PathVariable int id) {
 			paymentdao.delete(id);
 			return "redirect:/viewpaymentdetails";

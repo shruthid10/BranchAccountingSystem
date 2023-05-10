@@ -22,6 +22,9 @@ public class UserDao {
 	    List<User> users = jdbcTemplate.query(sql, new Object[]{username, password,role}, new BeanPropertyRowMapper<User>(User.class));
 	    return users.isEmpty() ? null : users.get(0);
 	}
+	
+	
+	
 
 	public void save(User user) {
         String sql = "INSERT INTO user (username, password,email,role) VALUES (?,?,?,?)";

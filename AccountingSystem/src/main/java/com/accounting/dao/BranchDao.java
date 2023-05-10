@@ -47,6 +47,11 @@ public class BranchDao  {
 			}
 		});
 	}
+	public List<Branch> getAllBranches() {
+	    List<Branch> branches = template.query("SELECT DISTINCT branch_id, branch_name FROM branch", new BeanPropertyRowMapper<Branch>(Branch.class));
+	    return branches;
+	}
+	
 	public Branch getBranchById(int id){  
 	    String sql="select * from branch where branch_id=?";  
 	    return template.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Branch>(Branch.class));  

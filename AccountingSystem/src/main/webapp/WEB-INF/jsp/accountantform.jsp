@@ -21,10 +21,18 @@
           <td><form:input path="salary" /></td>
          </tr> 
          <tr> 
-         <tr>  
+         <tr>
+                <td>Branch:</td>
+                <td>
+                    <form:select path="branch_id">
+                        <form:options items="${branches}" itemValue="branch_id" itemLabel="branch_name" />
+                    </form:select>
+                </td>
+            </tr>
+         <%-- <tr>  
           <td>Branch_id:</td>  
           <td><form:input path="branch_id" /></td>
-         </tr> 
+         </tr> --%> 
          <tr>
           
           <td> </td>  

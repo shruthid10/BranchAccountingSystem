@@ -10,7 +10,7 @@
          </tr>  
          <tr>  
           <td>Payment_Date:</td>  
-          <td><form:input path="payment_date" /></td>
+          <td><form:input type="date" path="payment_date" /></td>
          </tr> 
          <tr>  
           <td>Amount_paid:</td>  

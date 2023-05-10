@@ -5,6 +5,7 @@
 <a href="studentform">Add New Student</a></br>
 <a href="viewstudentlist">View Student List</a></br>
 <a href="paymentform">Payment Form</a>
+<a href="viewpaymentdetails">View Payment Details</a>
 
 
 <a href="login">Login</a></br>

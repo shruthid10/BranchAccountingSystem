@@ -9,11 +9,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.accounting.beans.Accountant;
+import com.accounting.beans.Branch;
 
 
 public class AccountantDao  {
 	JdbcTemplate template;
 
+	
 	public void setTemplate(JdbcTemplate template) {
 		this.template = template;
 	}
@@ -26,21 +28,28 @@ public class AccountantDao  {
 	return template.update(sql); 
 	  }
 	 
-	public List<Accountant> getAccountants() {
-		return template.query("select * from accountant", new RowMapper<Accountant>() {
-			public Accountant mapRow(ResultSet rs, int row) throws SQLException {
-				Accountant acc = new Accountant();
-				acc.setAccountant_id(rs.getInt(1));
-				acc.setFirst_name(rs.getString(2));
-				acc.setLast_name(rs.getString(3));
-				acc.setEmail(rs.getString(4));
-				acc.setSalary(rs.getFloat(5));
-				acc.setBranch_id(rs.getInt(6));
-				return acc;
-					
-			}
-		});
+	public List<Accountant> getAccountantsWithBranchNames() {
+	    String sql = "SELECT a.*, b.branch_name FROM Accountant a JOIN Branch b ON a.branch_id = b.branch_id";
+	    return template.query(sql, new RowMapper<Accountant>() {
+	        
+	        public Accountant mapRow(ResultSet rs, int rowNum) throws SQLException {
+	            Accountant accountant = new Accountant();
+	            accountant.setAccountant_id(rs.getInt("accountant_id"));
+	            accountant.setFirst_name(rs.getString("first_name"));
+	            accountant.setLast_name(rs.getString("last_name"));
+	            accountant.setEmail(rs.getString("email"));
+	            accountant.setSalary(rs.getFloat("salary"));
+	            accountant.setBranch_id(rs.getInt("branch_id"));
+	            
+	            Branch branch = new Branch();
+	            branch.setBranch_name(rs.getString("branch_name"));
+	            accountant.setBranch(branch);
+	            
+	            return accountant;
+	        }
+	    });
 	}
+
 	
 	public int update(Accountant a) {
   String sql ="update accountant set first_name='" + a.getFirst_name() + "',last_name='" + a.getLast_name()+"',email='" +a.getEmail() +"',salary='" +a.getSalary()

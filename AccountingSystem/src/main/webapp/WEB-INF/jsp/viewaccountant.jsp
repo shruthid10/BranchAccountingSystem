@@ -3,7 +3,7 @@
 
 	<h1>Accountant List</h1>
 	<table border="2" width="70%" cellpadding="2">
-	<tr><th>Accountant_id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Salary</th><th>Branch_Id</th><th>Update</th><th>Delete</th></tr>
+	<tr><th>Accountant_id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Salary</th><th>Branch_Id</th><th>Branch_Name<th>Update</th><th>Delete</th></tr>
     <c:forEach var="accountant" items="${list}"> 
     <tr>
     <td>${accountant.accountant_id}</td>
@@ -12,6 +12,7 @@
     <td>${accountant.email}</td>
     <td>${accountant.salary}</td>
     <td>${accountant.branch_id}</td>
+    <td>${branch.branch_name}</td>
     
     <td><a href="editaccountant/${accountant.accountant_id}">Update</a></td>
     <td><a href="deleteaccountant/${accountant.accountant_id}">Delete</a></td>

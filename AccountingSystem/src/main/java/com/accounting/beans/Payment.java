@@ -1,13 +1,14 @@
 package com.accounting.beans;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Payment {
-	private int payment_id;
-	private int  student_id;
-	private Date  payment_date;
-	private Float  amount_paid ;
 	
+	 private int payment_id ;
+	 private int student_id; 
+	 private String payment_date ;
+	 private float amount_paid;
 	public int getPayment_id() {
 		return payment_id;
 	}
@@ -22,17 +23,23 @@ public class Payment {
 	}
 	
 	
-	public Date getPayment_date() {
+	
+	public String getPayment_date() {
 		return payment_date;
 	}
-	public void setPayment_date(Date date) {
-		this.payment_date = date;
+	public void setPayment_date(String payment_date) {
+		this.payment_date = payment_date;
 	}
-	public Float getAmount_paid() {
+	public float getAmount_paid() {
 		return amount_paid;
 	}
-	public void setAmount_paid(Float amount_paid) {
+	public void setAmount_paid(float amount_paid) {
 		this.amount_paid = amount_paid;
 	}
-	
+	 
+	 
+	 
+	 
+	 
+
 }
