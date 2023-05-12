@@ -37,8 +37,8 @@
           <td><form:input path="phone_number" /></td>
          </tr>
            <tr>  
-          <td>Course_Name:</td>  
-          <td><form:input path="course_name" /></td>
+          <td>Course_id:</td>  
+          <td><form:input path="course_id" /></td>
          </tr>
           <tr>  
           <td>Branch_Id:</td>  

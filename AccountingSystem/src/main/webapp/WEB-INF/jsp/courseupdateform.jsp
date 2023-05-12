@@ -1,25 +1,25 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 
-		<h1>Edit Branch</h1>
-       <form:form method="POST" action="/AccountingSystem/editsave">  
+		<h1>Edit Course</h1>
+       <form:form method="POST" action="/AccountingSystem/editsavebranch">  
       	<table >  
       	<tr>
       	<td></td>  
-         <td><form:hidden  path="branch_id" /></td>
+         <td><form:hidden  path="course_id" /></td>
          </tr> 
          <tr>  
-          <td>Branch_Name : </td> 
-          <td><form:input path="branch_name"  /></td>
+          <td>Course_Name : </td> 
+          <td><form:input path="name"  /></td>
          </tr>  
          <tr>  
-          <td>Branch_Location :</td>  
-          <td><form:input path="branch_location" /></td>
+          <td>Course_Fees :</td>  
+          <td><form:input path="fees" /></td>
          </tr> 
           
          <tr>  
-          <td>State :</td>  
-          <td><form:input path="state" /></td>
+          <td>Course_Duration:</td>  
+          <td><form:input path="duration" /></td>
          </tr> 
          <tr>  
           <td> </td>  

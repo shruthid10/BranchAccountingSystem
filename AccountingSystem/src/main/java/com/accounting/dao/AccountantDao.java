@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.accounting.beans.Accountant;
-import com.accounting.beans.Branch;
+
 
 
 public class AccountantDao  {
@@ -40,10 +40,13 @@ public class AccountantDao  {
 	            accountant.setEmail(rs.getString("email"));
 	            accountant.setSalary(rs.getFloat("salary"));
 	            accountant.setBranch_id(rs.getInt("branch_id"));
-	            
-	            Branch branch = new Branch();
-	            branch.setBranch_name(rs.getString("branch_name"));
-	            accountant.setBranch(branch);
+	            accountant.setBranch_name(rs.getString("branch_name"));
+				/*
+				 * Branch branch = new Branch(); branch.setBranch_id(rs.getInt("branch_id"));
+				 * branch.setBranch_name(rs.getString("branch_name"));
+				 * 
+				 * accountant.setBranch(branch);
+				 */
 	            
 	            return accountant;
 	        }
@@ -74,4 +77,42 @@ public class AccountantDao  {
 	        Integer count = template.queryForObject(sql, Integer.class, email);
 	        return count != null && count > 0;
 	    }
+		
+	 public List<Accountant> getAllAccountants() {
+		    String sql = "SELECT a.*, b.branch_name FROM Accountant a JOIN Branch b ON a.branch_id = b.branch_id";
+		    return template.query(sql, new RowMapper<Accountant>() {
+		   
+		        public Accountant mapRow(ResultSet rs, int rowNum) throws SQLException {
+		            Accountant accountant = new Accountant();
+		            // Set the accountant attributes from the ResultSet
+		            accountant.setAccountant_id(rs.getInt("accountant_id"));
+		            accountant.setFirst_name(rs.getString("first_name"));
+		            accountant.setLast_name(rs.getString("last_name"));
+		            accountant.setEmail(rs.getString("email"));
+		            accountant.setSalary(rs.getFloat("salary"));
+		            // Set the branch name
+		            accountant.setBranch_id(rs.getInt("branch_id"));
+		            accountant.setBranch_name(rs.getString("branch_name"));
+		            return accountant;
+		        }
+		    });
+		}
+
+
+	public List<Accountant> getAccountantsByBranchName(String branch_name) {
+		 String sql = "SELECT a.*, b.branch_name FROM Accountant a JOIN Branch b ON a.branch_id = b.branch_id WHERE b.branch_name = ?";
+		    return template.query(sql, new Object[]{branch_name}, BeanPropertyRowMapper.newInstance(Accountant.class));	}
+
+
+	
+	public List<Accountant> searchAccountantsByBranchName(String branch_name) {
+	    String sql = "SELECT a.*, b.branch_name FROM Accountant a JOIN Branch b ON a.branch_id = b.branch_id WHERE b.branch_name = ?";
+	    return template.query(sql, new Object[]{branch_name}, BeanPropertyRowMapper.newInstance(Accountant.class));
+	}
+
+	
+	
+	
+
+
 }

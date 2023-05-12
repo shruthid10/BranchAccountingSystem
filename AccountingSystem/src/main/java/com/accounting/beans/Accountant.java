@@ -1,6 +1,9 @@
 package com.accounting.beans;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class Accountant {
+	
 	
 	  private int accountant_id;
 	  private String first_name;
@@ -9,7 +12,9 @@ public class Accountant {
 	  private float salary;
 	  private int branch_id;
 	  private String branch_name;
+	  @Autowired
 	  private Branch branch;
+	  
 	public int getAccountant_id() {
 		return accountant_id;
 	}
@@ -53,6 +58,18 @@ public class Accountant {
 		this.branch = branch;
 	}
 	
+	  public String getBranch_name() {
+		return branch_name;
+	}
+	public Branch getBranch() {
+		return branch;
+	}
+	@Override
+		public String toString() {
+			return "Accountant [accountant_id=" + accountant_id + ", first_name=" + first_name + ", last_name=" + last_name
+					+ ", email=" + email + ", salary=" + salary + ", branch_id=" + branch_id + ", branch_name="
+					+ branch_name + ", branch=" + branch + "]";
+		}
 	  
 	  
 

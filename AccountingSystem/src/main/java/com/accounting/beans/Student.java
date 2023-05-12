@@ -9,10 +9,13 @@ public class Student {
 	  private String city;
 	  private String  state;
 	  private String phone_number;
-	  private String course_name; 
+	  private int course_id; 
+	  private boolean payment_status;
 	  private int branch_id;
+	  private String name;
+	  private String branch_name;
 	  
-	  public int getStudent_id() {
+	public int getStudent_id() {
 		return student_id;
 	}
 	public void setStudent_id(int student_id) {
@@ -60,19 +63,47 @@ public class Student {
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
-	public String getCourse_name() {
-		return course_name;
+	public int getCourse_id() {
+		return course_id;
 	}
-	public void setCourse_name(String course_name) {
-		this.course_name = course_name;
+	public void setCourse_id(int course_id) {
+		this.course_id = course_id;
+	}
+	public boolean isPayment_status() {
+		return payment_status;
+	}
+	public void setPayment_status(boolean payment_status) {
+		this.payment_status = payment_status;
 	}
 	public int getBranch_id() {
 		return branch_id;
 	}
 	public void setBranch_id(int branch_id) {
 		this.branch_id = branch_id;
-	} 
+	}
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getBranch_name() {
+		return branch_name;
+	}
+	public void setBranch_name(String branch_name) {
+		this.branch_name = branch_name;
+	}
+	@Override
+	public String toString() {
+		return "Student [student_id=" + student_id + ", first_name=" + first_name + ", last_name=" + last_name
+				+ ", email=" + email + ", address=" + address + ", city=" + city + ", state=" + state
+				+ ", phone_number=" + phone_number + ", course_id=" + course_id + ", payment_status=" + payment_status
+				+ ", branch_id=" + branch_id + "]";
+	}
 	  
-	  
+	 
 
 }

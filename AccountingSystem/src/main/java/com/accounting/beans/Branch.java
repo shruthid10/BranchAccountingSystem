@@ -4,8 +4,7 @@ public class Branch {
 	
 	    private int branch_id;
 	    private String branch_name;
-	    private String address;
-	    private String city;
+	    private String branch_location;
 	    private String state;
 		public int getBranch_id() {
 			return branch_id;
@@ -19,17 +18,11 @@ public class Branch {
 		public void setBranch_name(String branch_name) {
 			this.branch_name = branch_name;
 		}
-		public String getAddress() {
-			return address;
+		public String getBranch_location() {
+			return branch_location;
 		}
-		public void setAddress(String address) {
-			this.address = address;
-		}
-		public String getCity() {
-			return city;
-		}
-		public void setCity(String city) {
-			this.city = city;
+		public void setBranch_location(String branch_location) {
+			this.branch_location = branch_location;
 		}
 		public String getState() {
 			return state;
@@ -37,6 +30,13 @@ public class Branch {
 		public void setState(String state) {
 			this.state = state;
 		}
+		@Override
+		public String toString() {
+			return "Branch [branch_id=" + branch_id + ", branch_name=" + branch_name + ", branch_location="
+					+ branch_location + ", state=" + state + "]";
+		}
 	    
-
+	    
+		
+	    
 }

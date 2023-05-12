@@ -5,9 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;  
 import org.springframework.jdbc.core.JdbcTemplate;  
-import org.springframework.jdbc.core.RowMapper; 
+import org.springframework.jdbc.core.RowMapper;
 
-
+import com.accounting.beans.Accountant;
 import com.accounting.beans.Branch;
 
 
@@ -18,15 +18,26 @@ public class BranchDao  {
 		this.template = template;
 	}
 	public int save(Branch b) {
-		String sql = "INSERT INTO branch (branch_name, address, city, state) VALUES ('" + b.getBranch_name() + "','"
-				+ b.getAddress() + "','" + b.getCity() + "','" + b.getState() + "')";
+//		String sql = "INSERT INTO branch (branch_id,branch_name, branch_location, state) VALUES ('"+ b.getBranch_id() + b.getBranch_name() + "','"
+//				+ b.getBranch_location()  + "','" + b.getState() + "')";
+		String sql = "INSERT INTO branch ( branch_name, branch_location, state) VALUES ('"
+				  + b.getBranch_name() + "','" + b.getBranch_location() + "','" +
+				  b.getState() + "')"; 
+
 		return template.update(sql);
 	}
+	/*
+	 * public int save(Branch branch) { String sql =
+	 * "INSERT INTO branch (branch_name, branch_location, state) VALUES (?, ?, ?)";
+	 * return template.update(sql, branch.getBranchName(),
+	 * branch.getBranchLocation(), branch.getState()); }
+	 */
+
 
 	public int update(Branch b) {
 
-		String sql = "update branch set branch_name='" + b.getBranch_name() + "',address='" + b.getAddress()
-				+ "',city='" + b.getCity() + "',state='" + b.getState() + "' where branch_id=" +b.getBranch_id()+"";
+		String sql = "update branch set branch_name='" + b.getBranch_name() + "',branch_location='" + b.getBranch_location()
+			 + "',state='" + b.getState() + "' where branch_id=" +b.getBranch_id()+"";
 	
 		return template.update(sql);
 	}
@@ -38,12 +49,11 @@ public class BranchDao  {
 				Branch br = new Branch();
 				br.setBranch_id(rs.getInt(1));
 				br.setBranch_name(rs.getString(2));
-				br.setAddress(rs.getString(3));
-				br.setCity(rs.getString(4));
-				br.setState(rs.getString(5));
+				br.setBranch_location(rs.getString(3));
+			    br.setState(rs.getString(4));
 				return br;
-				
-				
+			
+			
 			}
 		});
 	}
@@ -61,5 +71,22 @@ public class BranchDao  {
 	    String sql="delete from branch where branch_id="+id+"";  
 	    return template.update(sql);  
 	}  
-	
+	public List<Accountant> getAccountantsByBranch(int branchId) {
+	    String sql = "SELECT a.*, b.branch_name FROM Accountant a JOIN Branch b ON a.branch_id = b.branch_id WHERE a.branch_id = ?";
+	    return template.query(sql, new Object[]{branchId}, new RowMapper<Accountant>() {
+	        
+	        public Accountant mapRow(ResultSet rs, int rowNum) throws SQLException {
+	            Accountant accountant = new Accountant();
+	            accountant.setAccountant_id(rs.getInt("accountant_id"));
+	            accountant.setFirst_name(rs.getString("first_name"));
+	            accountant.setLast_name(rs.getString("last_name"));
+	            accountant.setEmail(rs.getString("email"));
+	            accountant.setSalary(rs.getFloat("salary"));
+	            accountant.setBranch_id(rs.getInt("branch_id"));
+                accountant.setBranch_name(rs.getString("branch_name"));
+	            
+	            return accountant;
+	        }
+	    });
+	}
 }

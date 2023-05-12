@@ -32,11 +32,21 @@
           <td>Phone_Number:</td>  
           <td><form:input path="phone_number" /></td>
          </tr>
-           <tr>  
-          <td>Course_Name:</td>  
-          <td><form:input path="course_name" /></td>
-         </tr>
-          <tr>
+       <tr>
+    <td>Course:</td>
+    <td>
+        <form:select path="course_id">
+            <form:option value="" label="--- Select Course ---"/>
+            <form:options items="${courses}" itemValue="course_id" itemLabel="name"/>
+        </form:select>
+    </td>
+</tr>
+		<tr>
+
+<td><form:input type="hidden" path="payment_status" value="false" /></td>
+</tr>
+
+		<tr>
             <td>Branch:</td>
             <td>
                 <form:select path="branch_id">

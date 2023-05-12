@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.accounting.beans.Branch;
+import com.accounting.beans.Course;
 import com.accounting.beans.Student;
 import com.accounting.dao.BranchDao;
+import com.accounting.dao.CourseDao;
 import com.accounting.dao.StudentDao;
 
 @Controller
@@ -22,17 +24,23 @@ public class StudentController {
 	StudentDao studentdao;
 	@Autowired
 	BranchDao dao;
+	@Autowired
+	CourseDao coursedao;
+	
 	@RequestMapping("/studentform")  
     public String showform(Model m){  
     	m.addAttribute("command", new Student());
     	List<Branch> branches = dao.getAllBranches();
         m.addAttribute("branches", branches);
+        List<Course> courses = coursedao.getAllCourses();
+        m.addAttribute("courses", courses);
         m.addAttribute("student", new Student());
     	return "studentform"; 
     }  
 	
 	@RequestMapping(value="/savestudent",method = RequestMethod.POST)  
     public String save(@ModelAttribute("student") Student student){  
+		System.out.println("???????????????"+student);
 		studentdao.save(student);  
         return "redirect:/viewstudentlist";//will redirect to viewemp request mapping  
     } 
