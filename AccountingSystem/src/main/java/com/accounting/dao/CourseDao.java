@@ -59,9 +59,9 @@ public class CourseDao {
 	    return template.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Course>(Course.class));  
 	}  
 	
-	public int delete(int id){  
-	    String sql="delete from course where course_id="+id+"";  
-	    return template.update(sql);  
-	}  
-	
+	/*
+	 * public int delete(int id){ String
+	 * sql="delete from course where course_id="+id+""; return template.update(sql);
+	 * }
+	 */
 }

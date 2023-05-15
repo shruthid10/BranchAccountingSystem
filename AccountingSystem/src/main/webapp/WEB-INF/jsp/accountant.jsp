@@ -3,15 +3,7 @@
 
 <html>
 <head>
-    <!-- <title>Accountants by Branch</title>
-</head>
-<body>
-    <h1>Accountants by Branch</h1>
     
-   <form action="/AccountingSystem/search" method="GET">
-  <input type="text" name="branch_name" placeholder="Enter branch name">
-  <button type="submit">Search</button>
-</form> -->
 <form action="/AccountingSystem/search" method="GET">
     <input type="radio" name="searchOption" value="accountant" checked onclick="updatePlaceholder('Enter branch name')">
     Search Accountants

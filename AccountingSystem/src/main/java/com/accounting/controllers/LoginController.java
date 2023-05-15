@@ -17,7 +17,13 @@ public class LoginController {
     @Autowired
     private UserDao userDao;
     
+	/*
+	 * @RequestMapping(value = "/", method = RequestMethod.GET) public String home()
+	 * { return "home"; }
+	 */
 
+
+    
        @RequestMapping(value = "/login", method = RequestMethod.GET)
         public String showLoginForm(Model model) {
             model.addAttribute("user", new User());
@@ -25,19 +31,22 @@ public class LoginController {
         }
 
        @RequestMapping(value = "/login", method = RequestMethod.POST)
-        public String processLoginForm(@RequestParam String username, @RequestParam String password, @RequestParam String role, Model model) {
-            User user = userDao.findByUsernameAndPasswordAndRole(username, password, role);
-            if(user != null) {
-                if(user.getRole().equals("admin")) {
-                    return "redirect:/admin";
-                } else if(user.getRole().equals("accountant")) {
-                    return "redirect:/accountant";
-                }
-            }
-            
-            model.addAttribute("error", "Invalid username or password");
-            return "login";
-        }
+       public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
+           User user = userDao.findByUsernameAndPassword(username, password);
+           if (user != null) {
+               String role = user.getRole();
+               if ("admin".equals(role)) {
+                   return "redirect:/admin";
+               } else if ("accountant".equals(role)) {
+                   return "redirect:/accountant";
+               }
+           }
+           
+           model.addAttribute("error", "Invalid username or password");
+           return "login";
+       }
+
+
     
        @RequestMapping(value = "/admin", method = RequestMethod.GET)
        public String showAdminPage() {

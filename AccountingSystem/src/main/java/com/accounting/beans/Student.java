@@ -1,5 +1,7 @@
 package com.accounting.beans;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class Student {
 	  private int student_id ;
 	  private String first_name;
@@ -14,6 +16,11 @@ public class Student {
 	  private int branch_id;
 	  private String name;
 	  private String branch_name;
+	  private Float amount_paid;
+	 
+	  private String payment_date;
+	  @Autowired
+	  private Payment Payment;
 	  
 	public int getStudent_id() {
 		return student_id;
@@ -96,6 +103,22 @@ public class Student {
 	public void setBranch_name(String branch_name) {
 		this.branch_name = branch_name;
 	}
+	
+	
+	
+	public Float getAmount_paid() {
+	    return amount_paid != null ? amount_paid.floatValue() : null;
+	}
+	public void setAmount_paid(Float amount_paid) {
+		this.amount_paid = amount_paid;
+	}
+	
+	public String getPayment_date() {
+		return payment_date;
+	}
+	public void setPayment_date(String payment_date) {
+		this.payment_date = payment_date;
+	}
 	@Override
 	public String toString() {
 		return "Student [student_id=" + student_id + ", first_name=" + first_name + ", last_name=" + last_name
@@ -103,6 +126,13 @@ public class Student {
 				+ ", phone_number=" + phone_number + ", course_id=" + course_id + ", payment_status=" + payment_status
 				+ ", branch_id=" + branch_id + "]";
 	}
+	public Payment getPayment() {
+		return Payment;
+	}
+	public void setPayment(Payment payment) {
+		Payment = payment;
+	}
+	
 	  
 	 
 

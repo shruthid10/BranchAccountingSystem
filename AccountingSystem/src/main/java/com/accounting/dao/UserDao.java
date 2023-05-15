@@ -23,6 +23,11 @@ public class UserDao {
 	    return users.isEmpty() ? null : users.get(0);
 	}
 	
+	public User findByUsernameAndPassword(String username, String password) {
+	    String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+	    List<User> users = jdbcTemplate.query(sql, new Object[]{username, password}, new BeanPropertyRowMapper<User>(User.class));
+	    return users.isEmpty() ? null : users.get(0);
+	}
 	
 	
 
@@ -43,5 +48,10 @@ public class UserDao {
 	      jdbcTemplate.queryForObject(sql, Integer.class, username);
 		  return count != null && count > 0; 
 		  }
-	 
+
+
+
+
+	
+	
 }

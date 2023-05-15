@@ -52,10 +52,10 @@ public class BranchController {
         dao.update(branch);  
         return "redirect:/viewbranch";  
     }  
-	@RequestMapping(value="/deletebranch/{id}",method = RequestMethod.GET)  
-    public String delete(@PathVariable int id){
-		dao.delete(id);  
-        return "redirect:/viewbranch";  
-    }  
+	/*
+	 * @RequestMapping(value="/deletebranch/{id}",method = RequestMethod.GET) public
+	 * String delete(@PathVariable int id){ dao.delete(id); return
+	 * "redirect:/viewbranch"; }
+	 */
 }
 

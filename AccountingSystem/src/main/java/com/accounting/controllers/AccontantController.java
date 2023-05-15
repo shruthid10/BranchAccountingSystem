@@ -41,14 +41,13 @@ public class AccontantController {
     	
     } 
 	
-	
-
-	  @RequestMapping(value="/saveaccountant",method = RequestMethod.POST) 
-	  public String saveaccountant(@ModelAttribute("accountant") Accountant accountant){
-	  accountantdao.saveaccountant(accountant); 
-	  
-	  return "redirect:/viewaccountant"; 
+	@RequestMapping(value="/saveaccountant",method = RequestMethod.POST)
+	public String saveaccountant(@ModelAttribute("accountant") Accountant accountant){
+	  accountantdao.saveaccountant(accountant);
+	  return "redirect:/viewaccountant";
 	  }
+
+	 
 	  
 
 	  @RequestMapping("/viewaccountant")  
@@ -102,12 +101,18 @@ public class AccontantController {
 	          return "studentSearchResults";
 	      }
 	      // Handle invalid search option
+	    
 	      return "error";
+	     
 	  }
 
-	 
+		
+		
+		  
+		 
+		 
+		
 
-	 
 }
 	 
 	

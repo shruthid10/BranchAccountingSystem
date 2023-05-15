@@ -25,10 +25,14 @@ public class PaymentDao {
 	}
 
 	public int save(Payment p) {
-		System.out.println(">>>>>>>>>>>>>"+ p.getPayment_date());
-		String sql = "INSERT INTO payment (student_id, payment_date, amount_paid) VALUES ('" + p.getStudent_id() + "','"
-				+ p.getPayment_date() + "','" + p.getAmount_paid() + "')";
-		return template.update(sql);
+	    System.out.println(">>>>>>>>>>>>>"+ p.getPayment_date());
+	    String sql = "INSERT INTO payment (student_id, payment_date, amount_paid) VALUES (?, ?, ?)";
+	    String updateSql = "UPDATE Student SET payment_status = ? WHERE student_id = ?";
+	    
+	    int rowsAffected = template.update(sql, p.getStudent_id(), p.getPayment_date(), p.getAmount_paid());
+	    template.update(updateSql, true, p.getStudent_id());
+	    
+	    return rowsAffected;
 	}
 	
 	public int update(Payment p) {
@@ -69,4 +73,9 @@ public class PaymentDao {
 		String sql = "delete from payment where payment_id=" + id + "";
 		return template.update(sql);
 	}
+	public Payment getPaymentDetailsByStudentId(int student_id) {
+	    String sql = "SELECT * FROM payment WHERE student_id = ?";
+	    return template.queryForObject(sql, new Object[]{student_id},new BeanPropertyRowMapper<Payment>(Payment.class));
+	}
+	
 }

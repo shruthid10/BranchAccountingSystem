@@ -9,6 +9,6 @@
 <a href="courseform">Add New Course</a></br>
 <a href="viewcourse">View Course Details</a></br>
 <a href="accountant">adminnnnnn func</a>
-
+<a href="searchstudent">aountant funcccc</a>
 <a href="login">Login</a></br>
 <a href="register">Register</a> 

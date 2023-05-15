@@ -3,7 +3,7 @@
 
 	<h1>Students List</h1>
 	<table border="2" width="70%" cellpadding="2">
-	<tr><th>Student_Id</th><th>First_Name</th><th>Last_Name</th><th>Email</th><th>Address</th><th>City</th><th>State</th><th>Phone_Number</th><th>Course_Name</th><th>Payment_Status</th><th>Branch_Id</th></tr>
+	<tr><th>Student_Id</th><th>First_Name</th><th>Last_Name</th><th>Email</th><th>Address</th><th>City</th><th>State</th><th>Phone_Number</th><th>Course_Name</th><th>Payment_Status</th><th>Branch_Id</th><th>Course_Name</th><th>Branch_Name</th></tr>
     <c:forEach var="student" items="${students}"> 
     <tr>
     <td>${student.student_id}</td>

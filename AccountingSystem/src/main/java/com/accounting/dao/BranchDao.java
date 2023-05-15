@@ -68,8 +68,11 @@ public class BranchDao  {
 	}  
 	
 	public int delete(int id){  
-	    String sql="delete from branch where branch_id="+id+"";  
-	    return template.update(sql);  
+	    String sql="UPDATE branch SET branch_id = null WHERE branch_id ="+id;  
+	     template.update(sql); 
+	    String sql1="DELETE FROM branch WHERE branch_id ="+ id;
+	    return template.update(sql1);
+	    
 	}  
 	public List<Accountant> getAccountantsByBranch(int branchId) {
 	    String sql = "SELECT a.*, b.branch_name FROM Accountant a JOIN Branch b ON a.branch_id = b.branch_id WHERE a.branch_id = ?";

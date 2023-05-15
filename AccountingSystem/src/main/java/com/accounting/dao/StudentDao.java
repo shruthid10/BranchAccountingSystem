@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,8 +12,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.accounting.beans.Student;
 
+
 public class StudentDao {
 	JdbcTemplate template;
+	
 
 	public void setTemplate(JdbcTemplate template) {
 		this.template = template;
@@ -77,6 +80,52 @@ public class StudentDao {
 	                 "JOIN Branch b ON s.branch_id = b.branch_id " +
 	                 "WHERE c.name = ?";
 	    return template.query(sql, new Object[]{courseName}, BeanPropertyRowMapper.newInstance(Student.class));
+	}
+	
+	
+
+	
+	public Student fetchStudentById(int student_id) {
+	    String sql = "SELECT s.*, p.amount_paid, p.payment_date " +
+	            "FROM student s " +
+	            "LEFT JOIN payment p ON s.student_id = p.student_id " +
+	            "WHERE s.student_id = ?";
+
+	    try {
+	        return template.queryForObject(sql, new Object[]{student_id}, new RowMapper<Student>() {
+	            public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+	                Student student = new Student();
+	                student.setStudent_id(rs.getInt("student_id"));
+	                student.setFirst_name(rs.getString("first_name"));
+	                student.setLast_name(rs.getString("last_name"));
+	                student.setEmail(rs.getString("email"));
+	                student.setAddress(rs.getString("address"));
+	                student.setCity(rs.getString("city"));
+	                student.setState(rs.getString("state"));
+	                student.setPhone_number(rs.getString("phone_number"));
+	                student.setCourse_id(rs.getInt("course_id"));
+	                student.setBranch_id(rs.getInt("branch_id"));
+
+	                // Check if payment details exist
+	             // Check if payment details exist
+	                if (rs.getObject("amount_paid") == null) {
+	                    student.setAmount_paid(null);
+	                    student.setPayment_date(null);
+	                    student.setPayment_status(false);
+	                } else {
+	                    float amountPaid = rs.getFloat("amount_paid");
+	                    student.setAmount_paid(rs.wasNull() ? null : amountPaid);
+	                    student.setPayment_date(rs.getString("payment_date"));
+	                    student.setPayment_status(true);
+	                }
+
+
+	                return student;
+	            }
+	        });
+	    } catch (EmptyResultDataAccessException e) {
+	        return null; // No student found with the given ID
+	    }
 	}
 
 }

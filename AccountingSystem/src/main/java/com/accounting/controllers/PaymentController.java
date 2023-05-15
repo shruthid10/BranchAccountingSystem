@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
- import com.accounting.beans.Payment;
+import com.accounting.beans.Payment;
 import com.accounting.dao.PaymentDao;
 
 
@@ -63,4 +63,7 @@ import com.accounting.dao.PaymentDao;
 			paymentdao.delete(id);
 			return "redirect:/viewpaymentdetails";
 		}
+		
+		
+
 	}

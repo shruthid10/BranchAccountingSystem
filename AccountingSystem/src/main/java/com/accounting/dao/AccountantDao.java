@@ -21,12 +21,28 @@ public class AccountantDao  {
 	}
 	
 	
-	public int saveaccountant(Accountant a) { 
-	String sql = "INSERT INTO accountant (accountant_id, first_name, last_name, email,salary,branch_id) VALUES ('"
-	  + a.getAccountant_id() + "','" + a.getFirst_name() + "','" + a.getLast_name() + "','" +
-	  a.getEmail() + "','" + a.getSalary() + "','" + a.getBranch_id() + "')"; 
-	return template.update(sql); 
-	  }
+	
+	/*
+	 * public int saveaccountant(Accountant a) { String sql =
+	 * "INSERT INTO accountant (accountant_id, first_name, last_name, email,salary,branch_id) VALUES ('"
+	 * + a.getAccountant_id() + "','" + a.getFirst_name() + "','" + a.getLast_name()
+	 * + "','" + a.getEmail() + "','" + a.getSalary() + "','" + a.getBranch_id() +
+	 * "')"; return template.update(sql); }
+	 */
+	 
+	
+	public int saveaccountant(Accountant a) {
+	    if (existsByEmail(a.getEmail())) {
+	       return -1; 
+	    } else {
+	        String sql = "INSERT INTO accountant (accountant_id, first_name, last_name, email, salary, branch_id) VALUES (?, ?, ?, ?, ?, ?)";
+	        return template.update(sql, a.getAccountant_id(), a.getFirst_name(), a.getLast_name(), a.getEmail(), a.getSalary(), a.getBranch_id());
+	    }
+	}
+
+	
+
+
 	 
 	public List<Accountant> getAccountantsWithBranchNames() {
 	    String sql = "SELECT a.*, b.branch_name FROM Accountant a JOIN Branch b ON a.branch_id = b.branch_id";
@@ -41,14 +57,7 @@ public class AccountantDao  {
 	            accountant.setSalary(rs.getFloat("salary"));
 	            accountant.setBranch_id(rs.getInt("branch_id"));
 	            accountant.setBranch_name(rs.getString("branch_name"));
-				/*
-				 * Branch branch = new Branch(); branch.setBranch_id(rs.getInt("branch_id"));
-				 * branch.setBranch_name(rs.getString("branch_name"));
-				 * 
-				 * accountant.setBranch(branch);
-				 */
-	            
-	            return accountant;
+				return accountant;
 	        }
 	    });
 	}

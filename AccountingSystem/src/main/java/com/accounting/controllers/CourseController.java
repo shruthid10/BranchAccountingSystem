@@ -52,10 +52,10 @@ public class CourseController {
         coursedao.update(course);  
         return "redirect:/viewcourse";  
     }  
-	@RequestMapping(value="/deletecourse/{id}",method = RequestMethod.GET)  
-    public String delete(@PathVariable int id){
-		coursedao.delete(id);  
-        return "redirect:/viewcourse";  
-    }  
+	/*
+	 * @RequestMapping(value="/deletecourse/{id}",method = RequestMethod.GET) public
+	 * String delete(@PathVariable int id){ coursedao.delete(id); return
+	 * "redirect:/viewcourse"; }
+	 */
 
 }
