@@ -17,10 +17,12 @@ public class LoginController {
     @Autowired
     private UserDao userDao;
     
-	/*
-	 * @RequestMapping(value = "/", method = RequestMethod.GET) public String home()
-	 * { return "home"; }
-	 */
+	
+	 @RequestMapping(value = "/", method = RequestMethod.GET)
+	 public String home() { 
+		 return "home"; 
+		 }
+	 
 
 
     
@@ -38,7 +40,7 @@ public class LoginController {
                if ("admin".equals(role)) {
                    return "redirect:/admin";
                } else if ("accountant".equals(role)) {
-                   return "redirect:/accountant";
+                   return "redirect:/accountanthome";
                }
            }
            
@@ -53,11 +55,16 @@ public class LoginController {
            return "admin";
        }
 
-       @RequestMapping(value = "/accountant", method = RequestMethod.GET)
+       @RequestMapping(value = "/accountanthome", method = RequestMethod.GET)
        public String showAccountantPage() {
-           return "accountant";
+           return "accountanthome";
        }
- 
+		
+		  @RequestMapping(value = "/accountant", method = RequestMethod.GET)
+		  public String showAdminSearchPage() {
+			  return "accountant"; 
+			  }
+		 
     }
 
     

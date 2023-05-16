@@ -12,3 +12,4 @@
 <a href="searchstudent">aountant funcccc</a>
 <a href="login">Login</a></br>
 <a href="register">Register</a> 
+<a href="accountant">Admin Search</a>

@@ -103,7 +103,8 @@ public class StudentController {
             if (student != null) {
                 model.addAttribute("student", student);
             } else {
-                model.addAttribute("errorMessage", "No student found with ID: " + student_id);
+                model.addAttribute("error", "No student found with ID: " + student_id);
+                return "searchstudent";
             }
         } catch (EmptyResultDataAccessException e) {
             model.addAttribute("errorMessage", "No student found with ID: " + student_id);

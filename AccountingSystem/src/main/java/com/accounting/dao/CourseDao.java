@@ -29,8 +29,10 @@ public class CourseDao {
 
 	public int update(Course c) {
 
-		String sql = "update branch set name='" + c.getName() + "',fees='" + c.getFees()
+		String sql = "update course set name='" + c.getName() + "',fees='" + c.getFees()
 			 + "',duration='" + c.getDuration() + "' where course_id=" +c.getCourse_id()+"";
+		
+
 			return template.update(sql);
 	}
 

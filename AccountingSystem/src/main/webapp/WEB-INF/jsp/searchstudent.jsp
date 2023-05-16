@@ -13,6 +13,7 @@
         <input type="text" name="student_id" placeholder="Enter Student ID" required>
         <input type="submit" value="Search">
     </form>
+    <p> ${error}</p>
     
 </body>
 </html>

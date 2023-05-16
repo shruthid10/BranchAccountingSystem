@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,19 +9,23 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-image: url("https://media.istockphoto.com/id/1093588696/photo/businesswoman-working-in-her-office.jpg?s=612x612&w=0&k=20&c=STFmL8MEafDKUNfqcEfl3qBXUENiKVFR2VDkuGws824=");
+            background-size: cover;
+            background-position: center;
         }
 
         .card {
             width: 400px;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(219, 211, 211, 0.8);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
         }
-       h1 {
-			text-align: center;
-		}
+
+        h1 {
+            text-align: center;
+        }
+
         .error {
             color: red;
         }
@@ -44,10 +47,26 @@
             box-sizing: border-box;
         }
 
-        .form-group input[type="submit"] {
-            background-color: #4CAF50;
+        input[type="submit"] {
+            padding: 8px 16px;
+            background-color: #000;
+            border: none;
             color: #fff;
             cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 20px;
+            box-shadow: 0 4px 0 0 #555;
+            font-size: 14px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 6px 0 0 #555;
+        }
+
+        input[type="submit"]:active {
+            transform: scale(0.95);
         }
     </style>
 </head>

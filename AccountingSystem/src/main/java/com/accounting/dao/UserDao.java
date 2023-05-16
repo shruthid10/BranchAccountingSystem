@@ -16,12 +16,6 @@ public class UserDao {
 	@Autowired
     private JdbcTemplate jdbcTemplate;
 
-		
-	public User findByUsernameAndPasswordAndRole(String username, String password, String role) {
-	    String sql = "SELECT * FROM user WHERE username = ? AND password = ? AND role = ?";
-	    List<User> users = jdbcTemplate.query(sql, new Object[]{username, password,role}, new BeanPropertyRowMapper<User>(User.class));
-	    return users.isEmpty() ? null : users.get(0);
-	}
 	
 	public User findByUsernameAndPassword(String username, String password) {
 	    String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
