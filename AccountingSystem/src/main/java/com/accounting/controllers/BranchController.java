@@ -22,7 +22,7 @@ public class BranchController {
 	BranchDao dao;
 	
 	@RequestMapping("/branchform")  
-    public String showform(Model m){  
+    public String showBranchForm(Model m){  
     	m.addAttribute("command", new Branch());
     	return "branchform"; 
     }  
@@ -30,11 +30,11 @@ public class BranchController {
 	@RequestMapping(value="/save",method = RequestMethod.POST)  
     public String save(@ModelAttribute("branch") Branch branch){  
         dao.save(branch);  
-        return "redirect:/viewbranch";//will redirect to viewemp request mapping  
+        return "redirect:/viewbranch";
     } 
 	
 	@RequestMapping("/viewbranch")  
-    public String viewemp(Model m){  
+    public String viewBranch(Model m){  
         List<Branch> list=dao.getBranches();  
         m.addAttribute("list",list);
         return "viewbranch";  
@@ -48,14 +48,10 @@ public class BranchController {
     }
 	
 	@RequestMapping(value="/editsave",method = RequestMethod.POST)  
-    public String editsave(@ModelAttribute("branch") Branch branch){  
+    public String editSave(@ModelAttribute("branch") Branch branch){  
         dao.update(branch);  
         return "redirect:/viewbranch";  
     }  
-	/*
-	 * @RequestMapping(value="/deletebranch/{id}",method = RequestMethod.GET) public
-	 * String delete(@PathVariable int id){ dao.delete(id); return
-	 * "redirect:/viewbranch"; }
-	 */
+	
 }
 

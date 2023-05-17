@@ -24,22 +24,31 @@ import com.accounting.dao.PaymentDao;
 		PaymentDao paymentdao;
 
 		@RequestMapping("/paymentform")
-		public String showform(Model m) {
+		public String showPaymentForm(Model m) {
 			m.addAttribute("command", new Payment());
 			return "paymentform";
 		}
 
 		@RequestMapping(value = "/savepayment", method = RequestMethod.POST)
-		public String save( Payment payment) {
-			
-			
-		
-		     paymentdao.save(payment);
+		public String save(@ModelAttribute("payment") Payment payment, Model model) {
+			int result = paymentdao.save(payment);
+
+			if (result == -1) {
+				model.addAttribute("error", "Error: Student ID already exists in the payment table");
+				return "paymentform";
+			} else if (result == -2) {
+				model.addAttribute("error", "Error: Student ID not found in the student table");
+				return "paymentform";
+			} else if (result == -3) {
+				model.addAttribute("error", "Error occurred during database access");
+				return "paymentform";
+			}
+
 			return "redirect:/viewpaymentdetails";
 		}
 
 		@RequestMapping("/viewpaymentdetails")
-		public String viewpaymentdetails(Model m) {
+		public String viewPaymentdetails(Model m) {
 			List<Payment> list = paymentdao.getPayments();
 			m.addAttribute("list", list);
 			return "viewpaymentdetails";
@@ -53,17 +62,9 @@ import com.accounting.dao.PaymentDao;
 		}
 
 		@RequestMapping(value = "/editsavepayment", method = RequestMethod.POST)
-		public String editsave(@ModelAttribute("payment") Payment payment) {
+		public String editSave(@ModelAttribute("payment") Payment payment) {
 			paymentdao.update(payment);
 			return "redirect:/viewpaymentdetails";
 		}
-
-		@RequestMapping(value = "/deletepayment/{id}", method = RequestMethod.GET)
-		public String delete(@PathVariable int id) {
-			paymentdao.delete(id);
-			return "redirect:/viewpaymentdetails";
-		}
-		
-		
 
 	}

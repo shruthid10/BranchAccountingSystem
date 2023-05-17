@@ -1,6 +1,5 @@
 package com.accounting.beans;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class Student {
 	  private int student_id ;
@@ -19,9 +18,7 @@ public class Student {
 	  private Float amount_paid;
 	 
 	  private String payment_date;
-	  @Autowired
-	  private Payment Payment;
-	  
+		
 	public int getStudent_id() {
 		return student_id;
 	}
@@ -126,12 +123,7 @@ public class Student {
 				+ ", phone_number=" + phone_number + ", course_id=" + course_id + ", payment_status=" + payment_status
 				+ ", branch_id=" + branch_id + "]";
 	}
-	public Payment getPayment() {
-		return Payment;
-	}
-	public void setPayment(Payment payment) {
-		Payment = payment;
-	}
+	
 	
 	  
 	 

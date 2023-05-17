@@ -54,6 +54,19 @@
             transform: scale(0.95);
         }
     </style>
+    <script>
+    function validateInput(event) {
+      var input = event.target;
+      var inputValue = input.value;
+      var pattern = /^[a-zA-Z\s\W]+$/; // Only allows letters and special characters
+      
+      if (!pattern.test(inputValue)) {
+        // Invalid input, clear the field
+        input.value = '';
+        alert('Only letters and special characters are allowed.');
+      }
+    }
+  </script>
 </head>
 <body>
     <div class="card">
@@ -62,15 +75,15 @@
             <table>
                 <tr>
                     <td>Branch Name:</td>
-                    <td><input type="text" name="branch_name" required></td>
+                    <td><input type="text" name="branch_name" oninput="validateInput(event)" required></td>
                 </tr>
                 <tr>
                     <td>Branch Location:</td>
-                    <td><input type="text" name="branch_location" required></td>
+                    <td><input type="text" name="branch_location" oninput="validateInput(event)" required></td>
                 </tr>
                 <tr>
                     <td>State:</td>
-                    <td><input type="text" name="state" required></td>
+                    <td><input type="text" name="state"  oninput="validateInput(event)" required></td>
                 </tr>
                 <tr>
                     <td></td>

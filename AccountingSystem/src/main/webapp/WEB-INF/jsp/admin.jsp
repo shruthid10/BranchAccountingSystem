@@ -36,7 +36,7 @@
       flex-direction: column;
       margin-top: 0;
       height: 100vh;
-      background-image: url('https://hdwallpaperim.com/wp-content/uploads/2017/09/16/57630-simple_background-748x468.jpg');
+      background-image: url('https://img.freepik.com/free-photo/business-office-scene_1387-15.jpg');
       background-size: cover;
       background-position: center;
     }
@@ -44,7 +44,7 @@
     .dummy-info {
       text-align: center;
       font-weight: bold; 
-      color: white;
+      color: black;
     }
 	</style>
 </head>
@@ -58,7 +58,8 @@
 		<a href="viewaccountant">View Accountants</a>
 		<a href="courseform">Add New Course</a>
 		<a href="viewcourse">View Course Details</a>
-		<a href="accountant">Search</a>
+		<a href="adminsearch">Search</a>
+		<a href="/AccountingSystem">Logout</a>
 	</div>
     <main>
         <div class="institute-photo"></div>

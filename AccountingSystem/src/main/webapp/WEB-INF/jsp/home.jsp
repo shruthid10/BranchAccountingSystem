@@ -9,7 +9,7 @@
 
     <meta charset="ISO-8859-1">
 
-    <title>My Institute</title>
+    <title>RK Institute</title>
 
     <style>
 
@@ -88,7 +88,7 @@
         <div class="institute-photo"></div>
         <div class="dummy-info">
             <h2>Welcome to RK Institute</h2>
-            <p>The RK Institutes of Technology  are prestigious  government owned public technical institutes located across Karnataka. Known for their excellence in education, they are under the ownership of the Ministry of Education of the Government of Karnatka.</p>
+            <p>The RK Institutes of Technology  are prestigious  government owned public technical institutes located across India. Known for their excellence in education, they are under the ownership of the Ministry of Education of the Government of India.</p>
         </div>
     </main>
 

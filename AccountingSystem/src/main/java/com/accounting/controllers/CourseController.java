@@ -22,7 +22,7 @@ public class CourseController {
 	CourseDao coursedao;
 	
 	@RequestMapping("/courseform")  
-    public String showform(Model m){  
+    public String showCourseForm(Model m){  
     	m.addAttribute("command", new Course());
     	return "courseform"; 
     }  
@@ -30,11 +30,11 @@ public class CourseController {
 	@RequestMapping(value="/savecourse",method = RequestMethod.POST)  
     public String save(@ModelAttribute("course") Course course){  
         coursedao.save(course);  
-        return "redirect:/viewcourse";//will redirect to viewemp request mapping  
+        return "redirect:/viewcourse";
     } 
 	
 	@RequestMapping("/viewcourse")  
-    public String viewcourse(Model m){  
+    public String viewCourse(Model m){  
         List<Course> list=coursedao.getCourses();  
         m.addAttribute("list",list);
         return "viewcourse";  
@@ -48,14 +48,10 @@ public class CourseController {
     }
 	
 	@RequestMapping(value="/editsavecourse",method = RequestMethod.POST)  
-    public String editsave(@ModelAttribute("course") Course course){  
+    public String editSave(@ModelAttribute("course") Course course){  
         coursedao.update(course);  
         return "redirect:/viewcourse";  
     }  
-	/*
-	 * @RequestMapping(value="/deletecourse/{id}",method = RequestMethod.GET) public
-	 * String delete(@PathVariable int id){ coursedao.delete(id); return
-	 * "redirect:/viewcourse"; }
-	 */
+	
 
 }

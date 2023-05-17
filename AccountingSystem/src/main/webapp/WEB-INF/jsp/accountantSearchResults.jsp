@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Branch List</title>
+    <title>Accountant Search</title>
     <style>
         body {
             display: flex;

@@ -2,14 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <html>
 <head>
-    <title>Add New Branch</title>
+    <title>Add New Accountant</title>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url("https://img.freepik.com/free-photo/business-office-scene_1387-15.jpg") no-repeat center center fixed;
+            background: url("https://img.freepik.com/free-photo/top-view-finance-business-elements_23-2148793757.jpg") no-repeat center center fixed;
             background-size: 100% 100%;
         }
 
@@ -54,6 +54,20 @@
             transform: scale(0.95);
         }
     </style>
+    <script>
+    function validateInput(event) {
+      var input = event.target;
+      var inputValue = input.value;
+      var pattern = /^[a-zA-Z\s\W]+$/; // Only allows letters and special characters
+      
+      if (!pattern.test(inputValue)) {
+        // Invalid input, clear the field
+        input.value = '';
+        alert('Only letters and special characters are allowed.');
+      }
+    }
+  </script>
+    
 </head>
 <body>
     <div class="card">
@@ -65,21 +79,23 @@
       	<table >  
          <tr>  
           <td>First_Name: </td> 
-          <td><form:input path="first_name"  /></td>
+          <td><form:input path="first_name" oninput="validateInput(event)" /></td>
           
          </tr>  
          <tr>  
           <td>Last_Name:</td>  
-          <td><form:input path="last_name" /></td>
+          <td><form:input path="last_name" oninput="validateInput(event)" /></td>
          </tr> 
          <tr>  
           <td>Email:</td>  
-          <td><form:input path="email" /></td>
+          <td><form:input path="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"  /></td>
          </tr> 
           <tr>  
           <td>Salary:</td>  
-          <td><form:input  path="salary"  /></td>
+          <td><input type="number" name="salary"  /></td>
+
          </tr> 
+         
          <tr> 
          <tr>
                 <td>Branch:</td>

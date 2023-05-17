@@ -18,56 +18,49 @@ public class LoginController {
     private UserDao userDao;
     
 	
-	 @RequestMapping(value = "/", method = RequestMethod.GET)
-	 public String home() { 
-		 return "home"; 
-		 }
-	 
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home() {
+		return "home";
+	}
 
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String showLoginForm(Model model) {
+		model.addAttribute("user", new User());
+		return "login";
+	}
 
-    
-       @RequestMapping(value = "/login", method = RequestMethod.GET)
-        public String showLoginForm(Model model) {
-            model.addAttribute("user", new User());
-            return "login";
-        }
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
+		User user = userDao.findByUsernameAndPassword(username, password);
+		if (user != null) {
+			String role = user.getRole();
+			if ("admin".equals(role)) {
+				return "redirect:/admin";
+			} else if ("accountant".equals(role)) {
+				return "redirect:/accountanthome";
+			}
+		}
 
-       @RequestMapping(value = "/login", method = RequestMethod.POST)
-       public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
-           User user = userDao.findByUsernameAndPassword(username, password);
-           if (user != null) {
-               String role = user.getRole();
-               if ("admin".equals(role)) {
-                   return "redirect:/admin";
-               } else if ("accountant".equals(role)) {
-                   return "redirect:/accountanthome";
-               }
-           }
-           
-           model.addAttribute("error", "Invalid username or password");
-           return "login";
-       }
+		model.addAttribute("error", "Invalid username or password");
+		return "login";
+	}
 
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String showAdminPage() {
+		return "admin";
+	}
 
-    
-       @RequestMapping(value = "/admin", method = RequestMethod.GET)
-       public String showAdminPage() {
-           return "admin";
-       }
+	@RequestMapping(value = "/accountanthome", method = RequestMethod.GET)
+	public String showAccountantPage() {
+		return "accountanthome";
+	}
 
-       @RequestMapping(value = "/accountanthome", method = RequestMethod.GET)
-       public String showAccountantPage() {
-           return "accountanthome";
-       }
-		
-		  @RequestMapping(value = "/accountant", method = RequestMethod.GET)
-		  public String showAdminSearchPage() {
-			  return "accountant"; 
-			  }
-		 
-    }
+	@RequestMapping(value = "/adminsearch", method = RequestMethod.GET)
+	public String showAdminSearchPage() {
+		return "adminsearch";
+	}
 
-    
+}
 
 
 

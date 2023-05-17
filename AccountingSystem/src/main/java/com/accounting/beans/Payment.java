@@ -1,8 +1,5 @@
 package com.accounting.beans;
 
-import java.sql.Date;
-import java.time.LocalDate;
-
 public class Payment {
 	
 	 private int payment_id ;
@@ -21,7 +18,6 @@ public class Payment {
 	public void setStudent_id(int student_id) {
 		this.student_id = student_id;
 	}
-	
 	
 	
 	public String getPayment_date() {

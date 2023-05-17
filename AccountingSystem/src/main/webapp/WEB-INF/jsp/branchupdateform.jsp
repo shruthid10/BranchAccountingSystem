@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <html>
 <head>
-    <title>Add New Branch</title>
+    <title>Update Branch</title>
     <style>
         body {
             display: flex;
@@ -63,6 +63,19 @@
             transform: scale(0.95);
         }
     </style>
+     <script>
+    function validateInput(event) {
+      var input = event.target;
+      var inputValue = input.value;
+      var pattern = /^[a-zA-Z\s\W]+$/; // Only allows letters and special characters
+      
+      if (!pattern.test(inputValue)) {
+        // Invalid input, clear the field
+        input.value = '';
+        alert('Only letters and special characters are allowed.');
+      }
+    }
+  </script>
 </head>
 <body>
     <div class="card">
@@ -75,15 +88,15 @@
                 </tr> 
                 <tr>  
                     <td>Branch_Name : </td> 
-                    <td><form:input path="branch_name"  /></td>
+                    <td><form:input path="branch_name" oninput="validateInput(event)" /></td>
                 </tr>  
                 <tr>  
                     <td>Branch_Location :</td>  
-                    <td><form:input path="branch_location" /></td>
+                    <td><form:input path="branch_location" oninput="validateInput(event)" /></td>
                 </tr> 
                 <tr>  
                     <td>State :</td>  
-                    <td><form:input path="state" /></td>
+                    <td><form:input path="state" oninput="validateInput(event)" /></td>
                 </tr> 
                 <tr>
                     <td colspan="2" style="text-align: center;">

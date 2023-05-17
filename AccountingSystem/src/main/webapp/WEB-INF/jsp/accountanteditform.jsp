@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <html>
 <head>
-    <title>Add New Branch</title>
+    <title>Accountant Edit</title>
     <style>
         body {
             display: flex;
@@ -67,6 +67,19 @@
             transform: scale(0.95);
         }
     </style>
+    <script>
+    function validateInput(event) {
+      var input = event.target;
+      var inputValue = input.value;
+      var pattern = /^[a-zA-Z\s\W]+$/; // Only allows letters and special characters
+      
+      if (!pattern.test(inputValue)) {
+        // Invalid input, clear the field
+        input.value = '';
+        alert('Only letters and special characters are allowed.');
+      }
+    }
+  </script>
 </head>
 <body>
     <div class="card">
@@ -79,15 +92,15 @@
          </tr> 
          <tr>  
           <td>First Name : </td> 
-          <td><form:input path="first_name"  /></td>
+          <td><form:input path="first_name" oninput="validateInput(event)" /></td>
          </tr>  
          <tr>  
           <td>Last Name :</td>  
-          <td><form:input path="last_name" /></td>
+          <td><form:input path="last_name" oninput="validateInput(event)" /></td>
          </tr> 
          <tr>  
           <td>Email :</td>  
-          <td><form:input path="email" /></td>
+          <td><form:input path="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" /></td>
          </tr> 
          <tr>  
           <td>Salary :</td>  

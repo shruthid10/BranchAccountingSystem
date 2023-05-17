@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Search Page</title>
+    <title>Admin Search Page</title>
 
     <style>
         /* Header styles */

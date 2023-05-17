@@ -51,6 +51,19 @@
         transform: scale(0.95);
     }
 </style>
+ <script>
+    function validateInput(event) {
+      var input = event.target;
+      var inputValue = input.value;
+      var pattern = /^[a-zA-Z\s\W]+$/; // Only allows letters and special characters
+      
+      if (!pattern.test(inputValue)) {
+        // Invalid input, clear the field
+        input.value = '';
+        alert('Only letters and special characters are allowed.');
+      }
+    }
+  </script>
 </head>
 <body>
 <div class="card">
@@ -63,7 +76,7 @@
          </tr> 
          <tr>  
           <td>Course_Name : </td> 
-          <td><form:input path="name"  /></td>
+          <td><form:input path="name" oninput="validateInput(event)" /></td>
          </tr>  
          <tr>  
           <td>Course_Fees :</td>  
