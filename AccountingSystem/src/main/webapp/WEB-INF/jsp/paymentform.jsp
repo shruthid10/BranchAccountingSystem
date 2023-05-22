@@ -69,8 +69,9 @@
         <form method="post" action="savepayment">
             <table>
                 <tr>
-                    <td>Student ID: </td> 
-                    <td><input type="text" name="student_id" required /></td>
+                    <td>
+                     <label for="student_id">Student ID:</label></td>
+      <td>  <input type="text" id="student_id" name="student_id" value="${student_id}" readonly /></td>
                 </tr>  
                 <tr>
                     <td>Payment Date:</td>  

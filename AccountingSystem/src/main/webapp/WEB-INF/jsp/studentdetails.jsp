@@ -102,7 +102,8 @@
            
                 <th>Branch ID</th>
                 <th>Payment Status</th>
-                <th>Payment Amount</th>
+                <th>Amount_Paid</th>
+                 <th>Due Amount</th>
                 <th>Payment Date</th>
             </tr>
         </thead>
@@ -121,6 +122,7 @@
                     <td>${student.branch_id}</td>
                     <td>${student.payment_status}</td>
                     <td>${student.amount_paid}</td>
+                     <td>${student.due_amount}</td>
                     <td>${student.payment_date}</td>
                 </tr>
             </c:forEach>

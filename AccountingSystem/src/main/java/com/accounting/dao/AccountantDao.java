@@ -43,11 +43,17 @@ public class AccountantDao {
 	}
 
 	public int update(Accountant a) {
-		String sql = "update accountant set first_name='" + a.getFirst_name() + "',last_name='" + a.getLast_name()
-				+ "',email='" + a.getEmail() + "',salary='" + a.getSalary() + "',branch_id='" + a.getBranch_id()
-				+ "' where accountant_id=" + a.getAccountant_id() + "";
-		return template.update(sql);
+	    float incrementPercentage = a.getIncrementPercentage();
+	    float currentSalary = a.getSalary();
+	    
+	    float incrementAmount = currentSalary * (incrementPercentage / 100);
+	    float newSalary = currentSalary + incrementAmount;
+	    
+	    String sql = "UPDATE accountant SET first_name=?, last_name=?, email=?, salary=?, branch_id=? WHERE accountant_id=?";
+	    
+	    return template.update(sql, a.getFirst_name(), a.getLast_name(), a.getEmail(), newSalary, a.getBranch_id(), a.getAccountant_id());
 	}
+
 
 	public Accountant getAccountantById(int id) {
 		String sql = "select * from accountant where accountant_id=?";
@@ -74,13 +80,11 @@ public class AccountantDao {
 
 			public Accountant mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Accountant accountant = new Accountant();
-				// Set the accountant attributes from the ResultSet
 				accountant.setAccountant_id(rs.getInt("accountant_id"));
 				accountant.setFirst_name(rs.getString("first_name"));
 				accountant.setLast_name(rs.getString("last_name"));
 				accountant.setEmail(rs.getString("email"));
 				accountant.setSalary(rs.getFloat("salary"));
-				// Set the branch name
 				accountant.setBranch_id(rs.getInt("branch_id"));
 				accountant.setBranch_name(rs.getString("branch_name"));
 				return accountant;

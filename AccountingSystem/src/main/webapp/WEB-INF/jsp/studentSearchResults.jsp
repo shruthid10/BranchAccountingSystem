@@ -68,7 +68,7 @@
         <th>City</th>
         <th>State</th>
         <th>Phone_Number</th>
-        <th>Course_Name</th>
+        <th>Course_Id</th>
         <th>Payment_Status</th>
         <th>Branch_Id</th>
         <th>Course_Name</th>

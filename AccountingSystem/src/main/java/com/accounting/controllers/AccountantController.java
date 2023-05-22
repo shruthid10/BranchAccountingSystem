@@ -3,6 +3,7 @@ package com.accounting.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,13 +24,13 @@ import com.accounting.dao.StudentDao;
 public class AccountantController {
 	
 	@Autowired
-	AccountantDao accountantdao;
+	AccountantDao accountantDao;
 	
 	@Autowired
 	BranchDao dao;
 	
 	@Autowired
-	StudentDao studentdao;
+	StudentDao studentDao;
 	
 	@Autowired
 	CourseDao courseDao;
@@ -44,56 +45,94 @@ public class AccountantController {
 
 	}
 
+	
 	@RequestMapping(value = "/saveaccountant", method = RequestMethod.POST)
 	public String saveAccountant(@ModelAttribute("accountant") Accountant accountant, Model model) {
-		if (accountantdao.existsByEmail(accountant.getEmail())) {
-			List<Branch> branches = dao.getAllBranches();
-			model.addAttribute("error2", "Email already exists");
-			model.addAttribute("branches", branches);
-			return "accountantform";
-		} else {
-			accountantdao.saveAccountant(accountant);
-			return "redirect:/viewaccountant";
-		}
+	    float salary = accountant.getSalary();
+	    
+	    if (salary <= 0) {
+	        model.addAttribute("error", "Invalid salary value. Please enter a positive value.");
+	        List<Branch> branches = dao.getAllBranches();
+	        model.addAttribute("branches", branches);
+	        return "accountantform";
+	    }
 
+	    float MAX_ALLOWED_SALARY=100000000;
+		if (salary > MAX_ALLOWED_SALARY) {
+	        model.addAttribute("error", "Invalid salary value. The salary is too large.");
+	        List<Branch> branches = dao.getAllBranches();
+	        model.addAttribute("branches", branches);
+	        return "accountantform";
+	    }
+
+	    if (accountantDao.existsByEmail(accountant.getEmail())) {
+	        List<Branch> branches = dao.getAllBranches();
+	        model.addAttribute("error", "Email already exists");
+	        model.addAttribute("branches", branches);
+	        return "accountantform";
+	    }
+
+	    try {
+	        accountantDao.saveAccountant(accountant);
+	        return "redirect:/viewaccountant";
+	    } catch (DataAccessException e) {
+	        model.addAttribute("error", "Failed to save the accountant. Please try again.");
+	        List<Branch> branches = dao.getAllBranches();
+	        model.addAttribute("branches", branches);
+	        return "accountantform";
+	    }
 	}
 
 	@RequestMapping("/viewaccountant")
 	public String viewAccountant(Model m) {
-		List<Accountant> list = accountantdao.getAccountantsWithBranchNames();
-
+		List<Accountant> list = accountantDao.getAccountantsWithBranchNames();
 		m.addAttribute("list", list);
 		return "viewaccountant";
 	}
 
 	@RequestMapping(value = "/editaccountant/{id}")
 	public String edit(@PathVariable int id, Model m) {
-		Accountant accountant = accountantdao.getAccountantById(id);
+		Accountant accountant = accountantDao.getAccountantById(id);
 		m.addAttribute("command", accountant);
 		return "accountanteditform";
 	}
 
 	@RequestMapping(value = "/editsaveaccountant", method = RequestMethod.POST)
-	public String editSave(@ModelAttribute("accountant") Accountant accountant) {
-		accountantdao.update(accountant);
-		return "redirect:/viewaccountant";
+	public String editSave(@ModelAttribute("accountant") Accountant accountant, Model model) {
+	    float incrementPercentage = accountant.getIncrementPercentage();
+	    if (incrementPercentage < 0) {
+	       
+	    	model.addAttribute("command", accountant);
+	        model.addAttribute("error", "Increment percentage must be a positive value");
+	        return "accountanteditform";
+	    }
+
+	    try {
+	        accountantDao.update(accountant);
+	    } catch (Exception e) {
+	       
+	        model.addAttribute("error", "Failed to update the accountant. Please try again.");
+	        return "accountanteditform";
+	    }
+
+	    return "redirect:/viewaccountant";
 	}
 
 	@RequestMapping(value = "/deleteaccountant/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable int id) {
-		accountantdao.delete(id);
+		accountantDao.delete(id);
 		return "redirect:/viewaccountant";
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(@RequestParam("searchOption") String searchOption,
 			@RequestParam("searchCriteria") String searchCriteria, Model model) {
-
+		
 		if ("accountant".equals(searchOption)) {
-			// Implement the logic to search accountants based on branch name
+			
 			if (dao.getBranchByBranchName(searchCriteria)) {
 
-				List<Accountant> accountants = accountantdao.searchAccountantsByBranchName(searchCriteria);
+				List<Accountant> accountants = accountantDao.searchAccountantsByBranchName(searchCriteria);
 				if (accountants.isEmpty()) {
 					model.addAttribute("error", "No accountant found");
 					return "adminsearch";
@@ -107,7 +146,7 @@ public class AccountantController {
 			}
 		} else if ("student".equals(searchOption)) {
 			if (courseDao.getCourseByCourseName(searchCriteria)) {
-				List<Student> students = studentdao.searchStudentsByCourseName(searchCriteria);
+				List<Student> students = studentDao.searchStudentsByCourseName(searchCriteria);
 				if (students.isEmpty()) {
 					model.addAttribute("error", "No student found");
 					return "adminsearch";
@@ -123,13 +162,6 @@ public class AccountantController {
 			return "error";
 		}
 	}
-
-
-
-
-
-
-	  
 	  
 
 }

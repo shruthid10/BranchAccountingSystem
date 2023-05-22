@@ -11,7 +11,7 @@
         height: 100vh;
         background: url("https://media.istockphoto.com/id/1094302626/photo/hand-raised-for-vote-and-asking-at-conference-seminar-meeting-room.jpg?s=612x612&w=0&k=20&c=r60nXw6xfHRoNPrTiyImBGsXNS5XjtoOQfKYPrIdKe8=") no-repeat center center fixed;
         background-size: cover;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(15px);
       }
 
       .container {
@@ -77,7 +77,7 @@
     <div class="container">
 	<h1>Students List</h1>
 	<table border="2" width="70%" cellpadding="2">
-	<tr><th>Student_Id</th><th>First_Name</th><th>Last_Name</th><th>Email</th><th>Address</th><th>City</th><th>State</th><th>Phone_Number</th><th>Course_Name</th><th>Payment_Status</th><th>Branch_Id</th><th>Update</th></tr>
+	<tr><th>Student_Id</th><th>First_Name</th><th>Last_Name</th><th>Email</th><th>Address</th><th>City</th><th>State</th><th>Phone_Number</th><th>Course_Id</th><th>Payment_Status</th><th>Branch_Id</th><th>Add Payment</th><th>Update</th></tr>
     <c:forEach var="student" items="${list}"> 
     <tr>
     <td>${student.student_id}</td>
@@ -91,6 +91,13 @@
     <td>${student.course_id}</td>
     <td>${student.payment_status}</td> 
     <td>${student.branch_id}</td>
+    <td>
+          <!-- Add a button for payment -->
+          <form action="/AccountingSystem/paymentform" method="GET">
+            <input type="hidden" name="student_id" value="${student.student_id}" />
+            <button class="btn" type="submit">Add Payment</button>
+          </form>
+        </td>
     <td><a href="editstudent/${student.student_id}"><button class="btn">Update</button></a></td>
     
     </tr>

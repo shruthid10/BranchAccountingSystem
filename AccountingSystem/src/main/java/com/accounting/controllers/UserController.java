@@ -28,7 +28,7 @@ public class UserController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String processRegistrationForm(@ModelAttribute("user") User user, Model model) {
-		System.out.println("User object from form: " + user.toString());
+		
 
 		if (!accountantDao.existsByEmail(user.getEmail())) {
 			model.addAttribute("error", "This email is not registered as an accountant.");

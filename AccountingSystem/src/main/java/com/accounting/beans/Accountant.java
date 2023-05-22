@@ -7,6 +7,7 @@ public class Accountant {
 	  private String last_name;
 	  private String email;
 	  private float salary;
+	  private float incrementPercentage;
 	  private int branch_id;
 	  private String branch_name;
 		
@@ -53,6 +54,15 @@ public class Accountant {
 	
 	  public String getBranch_name() {
 		return branch_name;
+	}
+	  
+	  
+	
+	public float getIncrementPercentage() {
+		return incrementPercentage;
+	}
+	public void setIncrementPercentage(float incrementPercentage) {
+		this.incrementPercentage = incrementPercentage;
 	}
 	@Override
 	public String toString() {

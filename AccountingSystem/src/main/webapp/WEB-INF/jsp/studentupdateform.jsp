@@ -103,11 +103,11 @@
          </tr>
            <tr>  
           <td>Course_id:</td>  
-          <td><form:input path="course_id" /></td>
+          <td><form:input path="course_id" readonly="true"/></td>
          </tr>
           <tr>  
           <td>Branch_Id:</td>  
-          <td><form:input path="branch_id" /></td>
+          <td><form:input path="branch_id" readonly="true"/></td>
          </tr>
          <tr>  
           <td> </td>  

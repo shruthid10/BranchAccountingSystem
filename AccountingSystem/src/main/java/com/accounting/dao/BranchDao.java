@@ -18,12 +18,14 @@ public class BranchDao {
 	}
 
 	public int save(Branch b) {
-
-		String sql = "INSERT INTO branch ( branch_name, branch_location, state) VALUES ('" + b.getBranch_name() + "','"
-				+ b.getBranch_location() + "','" + b.getState() + "')";
-
-		return template.update(sql);
-	}
+		 String checkSql = "SELECT COUNT(*) FROM branch WHERE branch_name = ?";
+		int count = template.queryForObject(checkSql, Integer.class, b.getBranch_name());
+		 if (count > 0) {
+		 return -1;
+		}
+		String sql = "INSERT INTO branch (branch_name, branch_location, state) VALUES (?, ?, ?)";
+		 return template.update(sql, b.getBranch_name(), b.getBranch_location(), b.getState());
+		}
 
 	public int update(Branch b) {
 
@@ -58,14 +60,7 @@ public class BranchDao {
 		return template.queryForObject(sql, new Object[] { id }, new BeanPropertyRowMapper<Branch>(Branch.class));
 	}
 
-	public int delete(int id) {
-		String sql = "UPDATE branch SET branch_id = null WHERE branch_id =" + id;
-		template.update(sql);
-		String sql1 = "DELETE FROM branch WHERE branch_id =" + id;
-		return template.update(sql1);
-
-	}
-
+	
 	public List<Accountant> getAccountantsByBranch(int branchId) {
 		String sql = "SELECT a.*, b.branch_name FROM Accountant a JOIN Branch b ON a.branch_id = b.branch_id WHERE a.branch_id = ?";
 		return template.query(sql, new Object[] { branchId }, new RowMapper<Accountant>() {

@@ -65,7 +65,7 @@
         <div class="institute-photo"></div>
         <div class="dummy-info">
           <h2>Welcome ADMIN!</h2>
-          <p>As a Admin you can add branch,Accountant,Course</p>
+          <p>As a Admin you can add a new branch,Accountant,Course</p>
         </div>
       </main>
 

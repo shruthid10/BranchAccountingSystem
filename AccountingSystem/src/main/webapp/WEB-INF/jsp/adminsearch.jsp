@@ -87,14 +87,14 @@
 
     <form action="/AccountingSystem/search" method="GET">
         <div class="radio-group">
-            <input type="radio" name="searchOption" value="accountant" checked onclick="updatePlaceholder('Enter branch name')">
+            <input type="radio" name="searchOption" value="accountant"  onclick="updatePlaceholder('Enter branch name')" required>
             <label for="accountant">Search Accountants</label>
         </div>
         <div class="radio-group">
-            <input type="radio" name="searchOption" value="student" onclick="updatePlaceholder('Enter course name')">
+            <input type="radio" name="searchOption" value="student" onclick="updatePlaceholder('Enter course name')" required>
             <label for="student">Search Students</label>
         </div>
-        <input type="text" name="searchCriteria" id="searchCriteria" placeholder="Enter branch name">
+        <input type="text" name="searchCriteria" id="searchCriteria" placeholder="Enter branch name" required >
         <button type="submit">Search</button>
     </form>
 

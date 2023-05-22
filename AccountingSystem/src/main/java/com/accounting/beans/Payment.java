@@ -6,6 +6,9 @@ public class Payment {
 	 private int student_id; 
 	 private String payment_date ;
 	 private float amount_paid;
+	 private double due_amount;
+	 private Student student;
+	 private Branch branch;
 	public int getPayment_id() {
 		return payment_id;
 	}
@@ -31,6 +34,24 @@ public class Payment {
 	}
 	public void setAmount_paid(float amount_paid) {
 		this.amount_paid = amount_paid;
+	}
+	public double getDue_amount() {
+		return due_amount;
+	}
+	public void setDue_amount(double due_amount) {
+		this.due_amount = due_amount;
+	}
+	public Student getStudent() {
+		return student;
+	}
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	public Branch getBranch() {
+		return branch;
+	}
+	public void setBranch(Branch branch) {
+		this.branch = branch;
 	}
 	 
 	 

@@ -43,7 +43,11 @@
             border-radius: 20px;
             box-shadow: 0 4px 0 0 #555;
         }
-
+       p.error {
+            color: red;
+            margin-top: 20px;
+            text-align: center;
+        }
         input[type="submit"]:hover {
             background-color: #fff;
             color: #000;
@@ -58,10 +62,10 @@
     function validateInput(event) {
       var input = event.target;
       var inputValue = input.value;
-      var pattern = /^[a-zA-Z\s\W]+$/; // Only allows letters and special characters
+      var pattern = /^[a-zA-Z\s\W]+$/; 
       
       if (!pattern.test(inputValue)) {
-        // Invalid input, clear the field
+      
         input.value = '';
         alert('Only letters and special characters are allowed.');
       }
@@ -114,7 +118,7 @@
           <td> </td>  
           <td><input type="submit" value="Save" /></td>  
          </tr>
-           <p class="error">${error2}</p>
+           <p class="error">${error}</p>
         </table>  
        </form:form>  
 </div>

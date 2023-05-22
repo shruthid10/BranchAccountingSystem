@@ -54,6 +54,11 @@
         input[type="submit"]:active {
             transform: scale(0.95);
         }
+        p.error {
+            color: red;
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
      <script>
     function validateInput(event) {
@@ -79,18 +84,19 @@
                     <td>Course Name:</td>
                     <td><input type="text" name="name" oninput="validateInput(event)" required></td>
                 </tr>
-                <tr>
-                    <td>Course Fees:</td>
-                    <td><input type="number" name="fees" required></td>
-                </tr>
+               <tr>
+    <td>Course Fees:</td>
+    <td><input type="number" name="fees"  required></td>
+</tr>
                 <tr>
                     <td>Duration:</td>
-                    <td><input type="number" name="duration" required></td>
+                    <td><input type="number" name="duration"  required></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td><input type="submit" value="Save"></td>
                 </tr>
+                <p class="error">${error}</p>
             </table>
         </form:form>
     </div>

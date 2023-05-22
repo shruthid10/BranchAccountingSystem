@@ -16,8 +16,10 @@ public class Student {
 	  private String name;
 	  private String branch_name;
 	  private Float amount_paid;
-	 
+	  private double due_amount;
 	  private String payment_date;
+	  private Course course;
+	
 		
 	public int getStudent_id() {
 		return student_id;
@@ -115,6 +117,20 @@ public class Student {
 	}
 	public void setPayment_date(String payment_date) {
 		this.payment_date = payment_date;
+	}
+	
+	
+	public double getDue_amount() {
+		return due_amount;
+	}
+	public void setDue_amount(double due_amount) {
+		this.due_amount = due_amount;
+	}
+	public Course getCourse() {
+		return course;
+	}
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 	@Override
 	public String toString() {

@@ -71,42 +71,87 @@ public class StudentDao {
 		return template.query(sql, new Object[] { courseName }, BeanPropertyRowMapper.newInstance(Student.class));
 	}
 
-	public Student fetchStudentById(int student_id) {
-		String sql = "SELECT s.*, p.amount_paid, p.payment_date " + "FROM student s "
-				+ "LEFT JOIN payment p ON s.student_id = p.student_id " + "WHERE s.student_id = ?";
-
-		try {
-			return template.queryForObject(sql, new Object[] { student_id }, new RowMapper<Student>() {
-				public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
-					Student student = new Student();
-					student.setStudent_id(rs.getInt("student_id"));
-					student.setFirst_name(rs.getString("first_name"));
-					student.setLast_name(rs.getString("last_name"));
-					student.setEmail(rs.getString("email"));
-					student.setAddress(rs.getString("address"));
-					student.setCity(rs.getString("city"));
-					student.setState(rs.getString("state"));
-					student.setPhone_number(rs.getString("phone_number"));
-					student.setCourse_id(rs.getInt("course_id"));
-					student.setBranch_id(rs.getInt("branch_id"));
-
-					if (rs.getObject("amount_paid") == null) {
-						student.setAmount_paid(null);
-						student.setPayment_date(null);
-						student.setPayment_status(false);
-					} else {
-						float amountPaid = rs.getFloat("amount_paid");
-						student.setAmount_paid(rs.wasNull() ? null : amountPaid);
-						student.setPayment_date(rs.getString("payment_date"));
-						student.setPayment_status(true);
-					}
-
-					return student;
-				}
-			});
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
+	public boolean existsByEmail(String email) {
+	    String query = "SELECT COUNT(*) FROM student WHERE email = ?";
+	    int count = template.queryForObject(query, Integer.class, email);
+	    return count > 0;
 	}
+
+	
+	public Student fetchStudentById(int student_id) {
+	    String sql = "SELECT s.*, p.amount_paid, p.payment_date, p.due_amount " +
+	            "FROM student s " +
+	            "LEFT JOIN payment p ON s.student_id = p.student_id " +
+	            "WHERE s.student_id = ?";
+
+	    try {
+	        return template.queryForObject(sql, new Object[]{student_id}, new RowMapper<Student>() {
+	            public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+	                Student student = new Student();
+	                student.setStudent_id(rs.getInt("student_id"));
+	                student.setFirst_name(rs.getString("first_name"));
+	                student.setLast_name(rs.getString("last_name"));
+	                student.setEmail(rs.getString("email"));
+	                student.setAddress(rs.getString("address"));
+	                student.setCity(rs.getString("city"));
+	                student.setState(rs.getString("state"));
+	                student.setPhone_number(rs.getString("phone_number"));
+	                student.setCourse_id(rs.getInt("course_id"));
+	                student.setBranch_id(rs.getInt("branch_id"));
+
+	                if (rs.getObject("amount_paid") == null) {
+	                    student.setAmount_paid(null);
+	                    student.setPayment_date(null);
+	                    student.setPayment_status(false);
+	                     // Set due amount as null if no payment is found
+	                } else {
+	                    float amountPaid = rs.getFloat("amount_paid");
+	                    student.setAmount_paid(rs.wasNull() ? null : amountPaid);
+	                    student.setPayment_date(rs.getString("payment_date"));
+
+	                    String courseFeeSql = "SELECT fees FROM Course WHERE course_id = ?";
+	                    double courseFee = template.queryForObject(courseFeeSql, Double.class, student.getCourse_id());
+	                    double dueAmount = courseFee - amountPaid;
+
+	                    if (dueAmount == 0) {
+	                        student.setPayment_status(true);
+	                    } else {
+	                        student.setPayment_status(false);
+	                    }
+
+	                    student.setDue_amount(dueAmount); // Set the due amount
+	                }
+
+	                return student;
+	            }
+	        });
+	    } catch (EmptyResultDataAccessException e) {
+	        return null;
+	    }
+	}
+
+	
+
+	public Student getStudentInfoById(int student_id) {
+	    String sql = "SELECT * FROM student WHERE student_id = ?";
+	    try {
+	        return template.queryForObject(sql, new Object[]{student_id}, new RowMapper<Student>() {
+	            public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+	                Student student = new Student();
+	                student.setStudent_id(rs.getInt("student_id"));
+	                student.setFirst_name(rs.getString("first_name"));
+	                student.setLast_name(rs.getString("last_name"));
+	                student.setCourse_id(rs.getInt("course_id"));
+	                student.setPhone_number(rs.getString("phone_number"));
+	                student.setAddress(rs.getString("address"));
+	                // Set other student details as needed
+	                return student;
+	            }
+	        });
+	    } catch (EmptyResultDataAccessException e) {
+	        return null;
+	    }
+	}
+
 
 }

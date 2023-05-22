@@ -1,6 +1,8 @@
 package com.accounting.controllers;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,13 +32,14 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model) {
+	public String processLoginForm(@RequestParam String username, @RequestParam String password, Model model,HttpSession session) {
 		User user = userDao.findByUsernameAndPassword(username, password);
 		if (user != null) {
 			String role = user.getRole();
 			if ("admin".equals(role)) {
 				return "redirect:/admin";
 			} else if ("accountant".equals(role)) {
+			    session.setAttribute("username", username);
 				return "redirect:/accountanthome";
 			}
 		}
@@ -55,6 +58,7 @@ public class LoginController {
 		return "accountanthome";
 	}
 
+	
 	@RequestMapping(value = "/adminsearch", method = RequestMethod.GET)
 	public String showAdminSearchPage() {
 		return "adminsearch";

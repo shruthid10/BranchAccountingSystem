@@ -12,7 +12,21 @@
             background: url("https://c1.wallpaperflare.com/preview/62/23/801/university-boston-college-massachusetts.jpg") no-repeat center center fixed;
             background-size: 100% 100%;
         }
+ .back-link {
+  color: #FFF; /* White text color */
+  text-decoration: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-weight: bold;
+}
 
+.back-link:hover {
+  color: #808080; /* Grey hover color */
+}
+
+
+        
         .card {
             width: 400px;
             background-color: rgba(255, 255, 255, 0.8);
@@ -53,6 +67,11 @@
         input[type="submit"]:active {
             transform: scale(0.95);
         }
+         p.error {
+            color: red;
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
     <script>
     function validateInput(event) {
@@ -67,8 +86,12 @@
       }
     }
   </script>
+  
 </head>
+
 <body>
+
+<a href="admin" class="back-link">Back</a>
     <div class="card">
         <h1>Add New Branch</h1>
         <form method="post" action="save">
@@ -88,6 +111,7 @@
                 <tr>
                     <td></td>
                     <td><input type="submit" value="Save"></td>
+                    <p class="error">${error }</p>
                 </tr>
             </table>
         </form>

@@ -62,15 +62,16 @@
         input[type="submit"]:active {
             transform: scale(0.95);
         }
+        
     </style>
      <script>
     function validateInput(event) {
       var input = event.target;
       var inputValue = input.value;
-      var pattern = /^[a-zA-Z\s\W]+$/; // Only allows letters and special characters
+      var pattern = /^[a-zA-Z\s\W]+$/; 
       
       if (!pattern.test(inputValue)) {
-        // Invalid input, clear the field
+        
         input.value = '';
         alert('Only letters and special characters are allowed.');
       }

@@ -80,12 +80,12 @@
          </tr>  
          <tr>  
           <td>Course_Fees :</td>  
-          <td><form:input path="fees" /></td>
+          <td><form:input path="fees" maxlength="12" /></td>
          </tr> 
           
          <tr>  
           <td>Course_Duration:</td>  
-          <td><form:input path="duration" /></td>
+          <td><form:input path="duration" maxlength="1" /></td>
          </tr> 
          <tr>  
           <td> </td>  

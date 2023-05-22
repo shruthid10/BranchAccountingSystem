@@ -53,6 +53,11 @@
         input[type="submit"]:active {
             transform: scale(0.95);
         }
+         p.error {
+            color: red;
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
      <script>
     function validateInput(event) {
@@ -129,6 +134,7 @@
           <td> </td>  
           <td><input type="submit" value="Save Student" /></td>  
          </tr>  
+         <p class="error">${error}</p>
         </table>  
        </form:form>  
 </div>

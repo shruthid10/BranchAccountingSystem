@@ -28,6 +28,11 @@
             justify-content: center;
             align-items: center;
         }
+         p.error {
+            color: red;
+            margin-top: 20px;
+            text-align: center;
+        }
 
         h1 {
             text-align: center;
@@ -71,10 +76,10 @@
     function validateInput(event) {
       var input = event.target;
       var inputValue = input.value;
-      var pattern = /^[a-zA-Z\s\W]+$/; // Only allows letters and special characters
+      var pattern = /^[a-zA-Z\s\W]+$/; 
       
       if (!pattern.test(inputValue)) {
-        // Invalid input, clear the field
+       
         input.value = '';
         alert('Only letters and special characters are allowed.');
       }
@@ -104,17 +109,22 @@
          </tr> 
          <tr>  
           <td>Salary :</td>  
-          <td><form:input path="salary" /></td>
+          <td><form:input path="salary" maxlength="10"  readonly="true" /></td>
          </tr> 
+         <tr>
+        <td>Increment Percentage:</td>
+        <td><input type="number" name="incrementPercentage" /></td>
+    </tr>
           <tr>  
           <td>Branch Id :</td>  
-          <td><form:input path="branch_id" /></td>
+          <td><form:input path="branch_id" readonly="true" /></td>
          </tr>
          <tr>  
           <td> </td>  
            <td colspan="2" style="text-align: center;">
           <input type="submit" value="Edit Save" /></td>  
          </tr>  
+         <p class="error">${error}</p>
         </table>  
        </form:form>  
     </div>

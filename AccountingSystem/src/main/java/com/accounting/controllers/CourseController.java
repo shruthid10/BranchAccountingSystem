@@ -19,7 +19,7 @@ import com.accounting.dao.CourseDao;
 public class CourseController {
 	
 	@Autowired
-	CourseDao coursedao;
+	CourseDao courseDao;
 	
 	@RequestMapping("/courseform")  
     public String showCourseForm(Model m){  
@@ -27,29 +27,42 @@ public class CourseController {
     	return "courseform"; 
     }  
 	
-	@RequestMapping(value="/savecourse",method = RequestMethod.POST)  
-    public String save(@ModelAttribute("course") Course course){  
-        coursedao.save(course);  
-        return "redirect:/viewcourse";
-    } 
+	@RequestMapping(value = "/savecourse", method = RequestMethod.POST)
+	public String save(@ModelAttribute("course") Course course, Model model) {
+	    int result = courseDao.save(course);
+	    
+	    if (result == -1) {
+	        model.addAttribute("error", "Course name already exists");
+	        return "courseform";
+	    } else if (result == -2) {
+	        model.addAttribute("error", "Fees value is too large");
+	        return "courseform";
+	    } else if (result == -3) {
+	        model.addAttribute("error", "Duration is too long");
+	        return "courseform";
+	    } else {
+	        return "redirect:/viewcourse";
+	    }
+	}
+
 	
 	@RequestMapping("/viewcourse")  
     public String viewCourse(Model m){  
-        List<Course> list=coursedao.getCourses();  
+        List<Course> list=courseDao.getCourses();  
         m.addAttribute("list",list);
         return "viewcourse";  
     }  
 
 	@RequestMapping(value="/editcourse/{id}")  
     public String edit(@PathVariable int id, Model m){  
-        Course course=coursedao.getCourseById(id);  
+        Course course=courseDao.getCourseById(id);  
         m.addAttribute("command",course);
         return "courseupdateform";  
     }
 	
 	@RequestMapping(value="/editsavecourse",method = RequestMethod.POST)  
     public String editSave(@ModelAttribute("course") Course course){  
-        coursedao.update(course);  
+        courseDao.update(course);  
         return "redirect:/viewcourse";  
     }  
 	

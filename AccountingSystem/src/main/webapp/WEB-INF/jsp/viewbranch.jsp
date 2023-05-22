@@ -15,6 +15,19 @@
             background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(5px);
         }
+  /* Link styles */
+.back-link {
+  color: #FFF; /* White text color */
+  text-decoration: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-weight: bold;
+}
+
+.back-link:hover {
+  color: #808080; /* Grey hover color */
+}
 
         .container {
            text-align: center;
@@ -80,6 +93,7 @@
     </style>
 </head>
 <body>
+<a href="admin" class="back-link">Back</a>
     <div class="container">
         <h1>Branch List</h1>
         <table>

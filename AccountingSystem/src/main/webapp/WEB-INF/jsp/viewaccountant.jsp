@@ -87,7 +87,6 @@
     <td>${accountant.salary}</td>
      <%-- <td>${accountant.branch_id}</td> --%>
    
-
   <td>${accountant.branch_name}</td> 
     
     <td><a href="editaccountant/${accountant.accountant_id}"> <button class="btn">Update</button></a></td>
@@ -98,5 +97,6 @@
     <br/>
     <a href="accountantform">Add New Accountant</a>
     </div>
+    <p>${error}</p>>
 </body>
 </html>

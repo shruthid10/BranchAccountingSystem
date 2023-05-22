@@ -11,7 +11,7 @@ CREATE TABLE Accountant (
 );
 
 
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
 To create Branch table:
 CREATE TABLE Branch (
   branch_id INT NOT NULL AUTO_INCREMENT,
@@ -21,7 +21,7 @@ CREATE TABLE Branch (
   PRIMARY KEY (branch_id)
 );
 
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 To create Student table:
 CREATE TABLE Student (
@@ -42,7 +42,7 @@ CREATE TABLE Student (
 );
 
 
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 To create Payment table:
@@ -55,7 +55,7 @@ CREATE TABLE Payment (
   FOREIGN KEY (student_id) REFERENCES Student(student_id)
 );
 
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 To create User table:
 CREATE TABLE User (
@@ -66,7 +66,7 @@ CREATE TABLE User (
   role VARCHAR(50) NOT NULL,
   PRIMARY KEY (id)
 );
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
  To create Course table:
 CREATE TABLE Course (
   course_id INT NOT NULL AUTO_INCREMENT,
@@ -77,13 +77,13 @@ CREATE TABLE Course (
 );
 
 
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 To insert into users:
 INSERT INTO users (id,username, password,email,role) VALUES (1,'admin', 'admin',admin@123',admin);
 
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 To insert into accountant:
  "INSERT INTO accountant (accountant_id, first_name, last_name, email,salary,branch_id) VALUES ('"
@@ -91,61 +91,68 @@ To insert into accountant:
 				+ "','" + a.getSalary() + "','" + a.getBranch_id() + "')";
 
 
-				
+----------------------------------------------------------------------------------------------------------------------------------------------------------------				
 To display accountant info with branch name
  "SELECT a.*, b.branch_name FROM Accountant a JOIN Branch b ON a.branch_id = b.branch_id";
  
- 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
  
 Searching Accountants based on branch_name
  "SELECT a.*, b.branch_name FROM Accountant a JOIN Branch b ON a.branch_id = b.branch_id WHERE b.branch_name = ?";
  
- 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
  
 To insert into branch:
  "INSERT INTO branch ( branch_name, branch_location, state) VALUES ('" + b.getBranch_name() + "','"
 				+ b.getBranch_location() + "','" + b.getState() + "')";
  
- 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
   To insert into course:
  "INSERT INTO course ( name, fees, duration) VALUES ('" + c.getName() + "','" + c.getFees() + "','"
 				+ c.getDuration() + "')";
 
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 				
  to check whether student id is present in payment table
 "SELECT COUNT(*) FROM payment WHERE student_id = ?";
 
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 "INSERT INTO payment (student_id, payment_date, amount_paid) VALUES (?, ?, ?)";
 "UPDATE Student SET payment_status = ? WHERE student_id = ?";
 
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  updating 
 "update payment set student_id='" + p.getStudent_id() + "',payment_date='" + p.getPayment_date()
 				+ "',amount_paid='" + p.getAmount_paid() + "' where payment_id=" + p.getPayment_id() + "";
 				
-	
+------------------------------------------------------------------------------------------------------------------------------------------------------------------	
 				
  To insert into student:
 "INSERT INTO student (student_id, first_name, last_name, email,address,city,state,phone_number,course_id,payment_status,branch_id) VALUES ('"
 				+ s.getStudent_id() + "','" + s.getFirst_name() + "','" + s.getLast_name() + "','" + s.getEmail()
 				+ "','" + s.getAddress() + "','" + s.getCity() + "','" + s.getState() + "','" + s.getPhone_number()
-				
-				
-	
-				
+-----------------------------------------------------------------------------------------------------------------------------------------------------------				
+fetching details			
+"SELECT p.payment_id, p.student_id, p.amount_paid, p.payment_date, p.due_amount, " +
+	             "s.first_name, s.last_name, s.course_id, s.phone_number, s.address, " +
+	             "c.name, c.fees, b.branch_id, b.branch_name " +
+	             "FROM payment p " +
+	             "INNER JOIN student s ON p.student_id = s.student_id " +
+	             "INNER JOIN course c ON s.course_id = c.course_id " +
+	             "INNER JOIN branch b ON s.branch_id = b.branch_id " +
+	             "WHERE p.payment_id = ?";
+------------------------------------------------------------------------------------------------------------------------------------------------------------			
 Search Student by course name:
  "SELECT s.*, c.name, b.branch_name " + "FROM Student s "
 				+ "JOIN Course c ON s.course_id = c.course_id " + "JOIN Branch b ON s.branch_id = b.branch_id "
 				+ "WHERE c.name = ?";
 				+ "','" + s.getCourse_id() + "','" + 0 + "','" + s.getBranch_id() + "')";
 	
-	
+--------------------------------------------------------------------------------------------------------------------------------------------------------------	
 				
 Fetching Student by id:				
 "SELECT s.*, p.amount_paid, p.payment_date " + "FROM student s "
@@ -153,7 +160,7 @@ Fetching Student by id:
 				
 	
 				
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 				
 				
 

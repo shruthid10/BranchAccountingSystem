@@ -25,13 +25,13 @@ import com.accounting.dao.StudentDao;
 public class StudentController {
 	
 	@Autowired
-	StudentDao studentdao;
+	StudentDao studentDao;
 	@Autowired
 	BranchDao dao;
 	@Autowired
 	CourseDao courseDao;
 	@Autowired
-	PaymentDao paymentdao;
+	PaymentDao paymentDao;
 	
 	@RequestMapping("/studentform")
 	public String showStudentForm(Model m) {
@@ -45,29 +45,35 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/savestudent", method = RequestMethod.POST)
-	public String save(@ModelAttribute("student") Student student) {
-		System.out.println("???????????????" + student);
-		studentdao.save(student);
-		return "redirect:/viewstudentlist";// will redirect to viewemp request mapping
+	public String save(@ModelAttribute("student") Student student, Model model) {
+	    if (studentDao.existsByEmail(student.getEmail())) {
+	    	model.addAttribute("command", new Student());
+	        model.addAttribute("error", "Email already exists");
+	        return "studentform";
+	    } else {
+	        studentDao.save(student);
+	        return "redirect:/viewstudentlist";
+	    }
 	}
+
 
 	@RequestMapping("/viewstudentlist")
 	public String viewStudent(Model m) {
-		List<Student> list = studentdao.getStudents();
+		List<Student> list = studentDao.getStudents();
 		m.addAttribute("list", list);
 		return "viewstudentlist";
 	}
 
 	@RequestMapping(value = "/editstudent/{id}")
 	public String edit(@PathVariable int id, Model m) {
-		Student student = studentdao.getStudentById(id);
+		Student student = studentDao.getStudentById(id);
 		m.addAttribute("command", student);
 		return "studentupdateform";
 	}
 
 	@RequestMapping(value = "/editsavestudent", method = RequestMethod.POST)
 	public String editSave(@ModelAttribute("student") Student student) {
-		studentdao.update(student);
+		studentDao.update(student);
 		return "redirect:/viewstudentlist";
 	}
 
@@ -79,7 +85,7 @@ public class StudentController {
 	@RequestMapping(value = "/student", method = RequestMethod.GET)
 	public String searchStudentById(@RequestParam("student_id") int student_id, Model model) {
 		try {
-			Student student = studentdao.fetchStudentById(student_id);
+			Student student = studentDao.fetchStudentById(student_id);
 
 			if (student != null) {
 				model.addAttribute("student", student);

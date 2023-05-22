@@ -27,11 +27,18 @@ public class BranchController {
     	return "branchform"; 
     }  
 	
-	@RequestMapping(value="/save",method = RequestMethod.POST)  
-    public String save(@ModelAttribute("branch") Branch branch){  
-        dao.save(branch);  
-        return "redirect:/viewbranch";
-    } 
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String save(@ModelAttribute("branch") Branch branch, Model model) {
+	    int result = dao.save(branch);
+	    if (result == -1) {
+	        model.addAttribute("error", "Branch name already exists");
+	        return "branchform";
+	    } else {
+	        return "redirect:/viewbranch";
+	    }
+	}
+
+	
 	
 	@RequestMapping("/viewbranch")  
     public String viewBranch(Model m){  

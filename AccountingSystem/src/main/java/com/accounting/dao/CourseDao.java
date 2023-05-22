@@ -19,10 +19,25 @@ public class CourseDao {
 	}
 
 	public int save(Course c) {
-		String sql = "INSERT INTO course ( name, fees, duration) VALUES ('" + c.getName() + "','" + c.getFees() + "','"
-				+ c.getDuration() + "')";
-		return template.update(sql);
+	    String checkSql = "SELECT COUNT(*) FROM course WHERE name = ?";
+	    int count = template.queryForObject(checkSql, Integer.class, c.getName());
+	    
+	    if (count > 0) {
+	        return -1; 
+	    }
+	    
+	    if (c.getFees() > 1000000000) {
+	        return -2; 
+	    }
+	    
+	    if (c.getDuration() > 10) {
+	        return -3; 
+	    }
+	    
+	    String sql = "INSERT INTO course (name, fees, duration) VALUES (?, ?, ?)";
+	    return template.update(sql, c.getName(), c.getFees(), c.getDuration());
 	}
+
 
 	public int update(Course c) {
 

@@ -54,14 +54,14 @@ pageEncoding="ISO-8859-1"%>
     <div class="navbar">
       <a href="studentform">Add New Student</a>
       <a href="viewstudentlist">View Student List</a>
-      <a href="paymentform">Payment Form</a>
+      
       <a href="viewpaymentdetails">View Payment Details</a>
       <a href="searchstudent">Search</a>
       <a href="/AccountingSystem/">Logout</a>
     </div>
     <div class="container">
-      <h1>Welcome Accountant</h1>
-      <p>As an Accountant You can Add Students and view students and update their payment status</p>
+      <h1>Welcome ${username}</h1>
+      <p>As an Accountant, You can add  and view students and update their payment status</p>
     </div>
   </body>
 </html>

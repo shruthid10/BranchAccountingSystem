@@ -82,7 +82,7 @@
     <div class="container">
 	<h1>Payment Details List</h1>
 	<table border="2" width="70%" cellpadding="2">
-	<tr><th>payment_id</th><th>student_id</th><th>payment_date</th><th>amount_paid</th><th>Update</th></tr>
+	<tr><th>payment_id</th><th>student_id</th><th>payment_date</th><th>amount_paid</th><th>Due_Amount</th><th>Update</th><th>Invoice</th></tr>
     <c:forEach var="payment" items="${list}"> 
     <tr>
     <td>${payment.payment_id}</td>
@@ -90,9 +90,15 @@
   
     <td>${payment.payment_date}</td>
     <td>${payment.amount_paid}</td>
+    <td>${payment.due_amount}</td>
     
     <td><a href="editpayment/${payment.payment_id}"><button class="btn">Update</button></a></td>
-  
+    <td>
+          <form action="/AccountingSystem/generateInvoice" method="POST">
+            <input type="hidden" name="payment_id" value="${payment.payment_id}">
+            <button class="btn" type="submit">Generate Invoice</button>
+          </form>
+        </td>
     </tr>
     </c:forEach>
     </table>
